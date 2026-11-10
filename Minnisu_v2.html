@@ -1,0 +1,941 @@
+<!DOCTYPE html>
+<html lang="si">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Minissu.lk</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Sinhala:wght@400;600;700&family=Noto+Sans+Tamil:wght@400;600;700&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --g:#0b5d4b;--g2:#0f7a61;--gl:#e6f2ee;--acc:#e89a00;--accl:#fff4dc;
+  --ink:#17201d;--mut:#5b6863;--bg:#f6f4ee;--card:#fff;--line:#e2ded4;
+  --red:#b8382a;--redl:#fbe9e6;--ok:#1f8a4c;--rad:18px;
+}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--ink)}
+body{font-family:'Noto Sans Sinhala','Noto Sans Tamil','Inter',system-ui,sans-serif;font-size:18px;line-height:1.55;-webkit-text-size-adjust:100%}
+button,input,select,textarea{font:inherit;color:inherit}
+.app{max-width:580px;margin:0 auto;padding:12px 16px 110px}
+header{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:6px 0 14px}
+.logo{display:flex;align-items:center;gap:10px;cursor:pointer;background:none;border:0;padding:0}
+.logo-mark{width:40px;height:40px;border-radius:12px;background:var(--g);display:grid;place-items:center}
+.logo-txt{font-family:Inter,sans-serif;font-weight:700;font-size:20px;letter-spacing:-.3px;color:var(--g)}
+.logo-txt span{color:var(--acc)}
+.langs{display:flex;background:#fff;border:1px solid var(--line);border-radius:999px;padding:3px}
+.langs button{border:0;background:none;padding:6px 11px;border-radius:999px;font-size:15px;cursor:pointer;min-width:40px}
+.langs button.on{background:var(--g);color:#fff}
+h1{font-size:30px;line-height:1.25;margin:6px 0 4px}
+h2{font-size:23px;line-height:1.3;margin:4px 0 12px}
+h3{font-size:19px;margin:16px 0 8px}
+p{margin:6px 0}
+.mut{color:var(--mut)}
+.small{font-size:15px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--rad);padding:16px;margin:12px 0}
+.search{display:flex;align-items:center;gap:8px;background:#fff;border:2px solid var(--line);border-radius:999px;padding:6px 6px 6px 18px;margin:16px 0}
+.search:focus-within{border-color:var(--g2)}
+.search input{flex:1;border:0;outline:0;background:none;min-width:0;padding:8px 0;font-size:18px}
+.iconbtn{width:48px;height:48px;border-radius:50%;border:0;display:grid;place-items:center;cursor:pointer;flex:none}
+.iconbtn.g{background:var(--g);color:#fff}
+.iconbtn.l{background:var(--gl);color:var(--g)}
+.big{display:flex;align-items:center;gap:16px;width:100%;text-align:left;border:0;border-radius:var(--rad);padding:20px;margin:12px 0;cursor:pointer;min-height:96px;box-shadow:0 1px 0 rgba(0,0,0,.04)}
+.big .ic{width:58px;height:58px;border-radius:16px;display:grid;place-items:center;flex:none;font-size:30px}
+.big b{display:block;font-size:24px;line-height:1.25}
+.big small{display:block;font-size:15px;opacity:.85}
+.big.work{background:var(--g);color:#fff}.big.work .ic{background:rgba(255,255,255,.16)}
+.big.find{background:#fff;color:var(--ink);border:2px solid var(--g)}.big.find .ic{background:var(--gl)}
+.big.speak{background:var(--accl);color:var(--ink);border:2px dashed var(--acc)}.big.speak .ic{background:var(--acc);color:#fff}
+.tag{text-align:center;color:var(--g);font-weight:600;margin:18px 0 4px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border-radius:14px;border:0;padding:14px 20px;font-weight:600;cursor:pointer;min-height:54px}
+.btn.p{background:var(--g);color:#fff}.btn.p:disabled{opacity:.5;cursor:not-allowed}
+.btn.s{background:#fff;color:var(--g);border:2px solid var(--g)}
+.btn.t{background:none;color:var(--g);padding:10px 8px;min-height:auto}
+.btn.w{width:100%}
+.btn.wa{background:#1fa855;color:#fff}
+.btn.danger{background:#fff;color:var(--red);border:2px solid var(--red)}
+.row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.row>.grow{flex:1}
+label.f{display:block;font-weight:600;margin:14px 0 6px}
+.inp{width:100%;border:2px solid var(--line);border-radius:14px;padding:13px 14px;background:#fff;outline:0;font-size:18px}
+.inp:focus{border-color:var(--g2)}
+textarea.inp{min-height:120px;resize:vertical}
+.hint{font-size:15px;color:var(--mut);margin-top:4px}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{border:2px solid var(--line);background:#fff;border-radius:999px;padding:7px 14px;cursor:pointer;font-size:16px}
+.chip.on{border-color:var(--g);background:var(--gl);color:var(--g);font-weight:600}
+.chip.sm{padding:4px 10px;font-size:14px;cursor:default}
+.steps{display:flex;gap:6px;margin:4px 0 14px}
+.steps i{flex:1;height:6px;border-radius:3px;background:var(--line)}
+.steps i.on{background:var(--g)}
+.back{display:inline-flex;align-items:center;gap:6px;background:none;border:0;color:var(--g);font-weight:600;cursor:pointer;padding:6px 0;margin-bottom:4px}
+.note{background:var(--accl);border-left:4px solid var(--acc);border-radius:10px;padding:10px 12px;font-size:15px;margin:10px 0}
+.note.red{background:var(--redl);border-color:var(--red)}
+.note.g{background:var(--gl);border-color:var(--g)}
+.wcard{display:flex;gap:14px;align-items:flex-start;cursor:pointer}
+.av{width:64px;height:64px;border-radius:16px;background:var(--gl);color:var(--g);display:grid;place-items:center;font-weight:700;font-size:26px;flex:none;overflow:hidden}
+.av img{width:100%;height:100%;object-fit:cover}
+.av.lg{width:96px;height:96px;font-size:38px;border-radius:22px}
+.wname{font-weight:700;font-size:19px;line-height:1.3}
+.occ{color:var(--g);font-weight:600}
+.meta{font-size:15px;color:var(--mut)}
+.dot{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:5px;vertical-align:middle}
+.dot.on{background:var(--ok)}.dot.off{background:var(--red)}.dot.date{background:var(--acc)}
+.badges{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
+.badge{font-size:13px;border-radius:8px;padding:2px 8px;background:#f1efe9;color:var(--mut)}
+.badge.ok{background:var(--gl);color:var(--g)}
+.badge.demo{background:#ece8ff;color:#4b3aa8}
+.why{font-size:13px;color:var(--mut);margin-top:6px}
+.score{margin-left:auto;text-align:right;font-family:Inter,sans-serif;font-weight:700;color:var(--g);font-size:18px;flex:none}
+.score small{display:block;font-weight:400;font-size:11px;color:var(--mut)}
+.toggle{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.sw{position:relative;width:72px;height:40px;border-radius:999px;border:0;background:var(--red);cursor:pointer;flex:none;transition:background .2s}
+.sw::after{content:"";position:absolute;top:4px;left:4px;width:32px;height:32px;border-radius:50%;background:#fff;transition:left .2s}
+.sw.on{background:var(--ok)}.sw.on::after{left:36px}
+.selfie{width:150px;height:150px;border-radius:24px;background:var(--gl);display:grid;place-items:center;overflow:hidden;margin:6px 0;border:2px dashed var(--g2)}
+.selfie img{width:100%;height:100%;object-fit:cover}
+.tabs{display:flex;gap:6px;margin-bottom:6px}
+.tabs button{border:0;background:#f1efe9;border-radius:10px;padding:5px 12px;cursor:pointer;font-size:15px}
+.tabs button.on{background:var(--g);color:#fff}
+.orig{background:#f8f7f3;border-radius:12px;padding:10px 12px;font-size:16px;white-space:pre-wrap}
+.modal{position:fixed;inset:0;background:rgba(20,28,25,.55);display:flex;align-items:flex-end;justify-content:center;z-index:50}
+.sheet{background:var(--bg);width:100%;max-width:580px;max-height:92vh;overflow:auto;border-radius:24px 24px 0 0;padding:18px 18px 28px}
+@media(min-width:640px){.modal{align-items:center}.sheet{border-radius:24px}}
+.toast{position:fixed;left:50%;bottom:22px;transform:translateX(-50%);background:var(--ink);color:#fff;border-radius:14px;padding:12px 18px;font-size:16px;z-index:80;max-width:92vw;box-shadow:0 6px 20px rgba(0,0,0,.2)}
+.spin{display:inline-block;width:18px;height:18px;border:3px solid rgba(255,255,255,.4);border-top-color:#fff;border-radius:50%;animation:sp 1s linear infinite}
+.spin.d{border-color:rgba(11,93,75,.25);border-top-color:var(--g)}
+@keyframes sp{to{transform:rotate(360deg)}}
+.cats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.cat{border:1px solid var(--line);background:#fff;border-radius:14px;padding:10px 6px;text-align:center;cursor:pointer;font-size:14px;line-height:1.3}
+.cat .e{font-size:26px;display:block}
+footer{font-size:13px;color:var(--mut);text-align:center;margin-top:28px;line-height:1.5}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+:focus-visible{outline:3px solid var(--acc);outline-offset:2px}
+</style>
+</head>
+<body>
+<div class="app">
+  <header>
+    <button class="logo" data-act="home" aria-label="Minissu.lk home">
+      <span class="logo-mark"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><circle cx="8" cy="8" r="3.2" fill="#fff"/><circle cx="16" cy="8" r="3.2" fill="#e89a00"/><path d="M2.5 19c.6-3.4 2.8-5.4 5.5-5.4s4.9 2 5.5 5.4M10.5 19c.6-3.4 2.8-5.4 5.5-5.4s4.9 2 5.5 5.4" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg></span>
+      <span class="logo-txt">minissu<span>.lk</span></span>
+    </button>
+    <div class="langs" role="group" aria-label="Language">
+      <button data-lang="si">සිං</button><button data-lang="ta">தமி</button><button data-lang="en">EN</button>
+    </div>
+  </header>
+  <main id="view"></main>
+  <footer id="foot"></footer>
+</div>
+<div id="modal"></div>
+<div id="toast"></div>
+
+<script>
+'use strict';
+/* =========================================================
+   Minissu.lk — prototype
+   ========================================================= */
+
+// ---------- UI text ----------
+const T = {
+ si:{
+  hello:'ආයුබෝවන්!', ask:'ඔබට අවශ්‍ය සේවාව කුමක්ද?', searchPh:'ඔබට අවශ්‍ය දේ සොයන්න...',
+  findWork:'වැඩ සොයන්න', findWorkSub:'මගේ රැකියාව ප්‍රචාරය කරන්න', findWorker:'කෙනෙක් සොයන්න', findWorkerSub:'දක්ෂ කෙනෙක් ඉක්මනින් සොයාගන්න',
+  speak:'කතා කර සොයන්න', speakSub:'සිංහල, දෙමළ හෝ ඉංග්‍රීසියෙන් කතා කරන්න', tagline:'ඕනෑ වැඩකට මනුස්සයෙක්, දැන් ෆෝන් එකෙන්',
+  motto:'කියන්න. සොයන්න. සම්බන්ධ වන්න.', back:'ආපසු', next:'ඊළඟ', popular:'ජනප්‍රිය සේවා',
+  // register
+  regTitle:'වැඩ සොයන්න — ලියාපදිංචිය', step:'පියවර', name:'ඔබේ නම', namePh:'උදා: සුනිල් පෙරේරා', phone:'ජංගම දුරකථන අංකය', phonePh:'07X XXX XXXX',
+  phoneBad:'වලංගු ශ්‍රී ලංකා ජංගම අංකයක් ඇතුළත් කරන්න (07X XXX XXXX).',
+  otpNote:'මෙය මූලාකෘතියකි. SMS කේතයක් (OTP) තවම යවන්නේ නැත — ඔබගේ අංකය "තහවුරු නොකළ" ලෙස පෙන්වයි.',
+  where:'ඔබ සිටින්නේ කොහේද?', town:'ඔබේ නගරය', pickTown:'නගරය තෝරන්න', useGps:'මගේ ස්ථානය භාවිතා කරන්න', gpsFail:'ස්ථානය ලබාගත නොහැක. කරුණාකර නගරය අතින් තෝරන්න.',
+  areas:'වැඩ භාර ගන්නා ප්‍රදේශ', areasHint:'ඔබේ නගරයට ආසන්න ප්‍රදේශ තෝරන්න. ඔබේ නිවසේ ලිපිනය කිසිවිටෙක පෙන්වන්නේ නැත.',
+  selfieT:'ඔබේ ඡායාරූපය (සෙල්ෆි)', selfieHint:'ඔබේ මුහුණ පැහැදිලිව පෙනෙන ඡායාරූපයක් ගන්න. මෙය හැඳුනුම්පත් තහවුරු කිරීමක් නොවේ.', takeSelfie:'ඡායාරූපය ගන්න / තෝරන්න', retake:'නැවත ගන්න', skip:'දැනට මඟ හරින්න',
+  describe:'ඔබ කරන වැඩ ගැන කියන්න', describeHint:'සරල වචන කිහිපයක් ලියන්න හෝ කතා කරන්න. AI එය වෘත්තීය පැතිකඩක් බවට පත් කරයි.',
+  describePh:'උදා: මම ගෙවල් පින්තාරු කරනවා. අවුරුදු 8ක පළපුරුද්ද තියෙනවා. කොළඹ සහ ගම්පහ ප්‍රදේශවල වැඩ කරනවා.',
+  example:'උදාහරණය භාවිතා කරන්න', makeProfile:'AI සමඟ පැතිකඩ සාදන්න', making:'පැතිකඩ සාදමින්...',
+  review:'ඔබේ පැතිකඩ පරීක්ෂා කරන්න', reviewHint:'AI ලියූ දේ නිවැරදිදැයි බලන්න. ඕනෑම දෙයක් වෙනස් කළ හැක.', occupation:'ප්‍රධාන වෘත්තිය', skills:'කුසලතා', skillsHint:'කොමා මගින් වෙන් කරන්න',
+  years:'පළපුරුද්ද (අවුරුදු)', yearsNone:'ඔබ පළපුරුද්ද සඳහන් කළේ නැත — අවශ්‍ය නම් ඇතුළත් කරන්න.', yearsFrom:'ඔබේ වචන වලින් ගත් අගය',
+  desc:'විස්තරය', orig:'ඔබ කී දේ (මුල් පිටපත)', suggest:'AI යෝජනා කරන අමතර කුසලතා', suggestHint:'ඔබ ඇත්තටම කරන ඒවා පමණක් තෝරන්න.', readAloud:'ශබ්ද නඟා කියවන්න',
+  noVoice:'මෙම උපාංගයේ/බ්‍රවුසරයේ කටහඬ ලබාගත නොහැක. කරුණාකර ටයිප් කරන්න.', listening:'අහගෙන ඉන්නවා... කතා කරන්න',
+  avail:'ඔබ වැඩ සඳහා සූදානම්ද?', availNow:'දැන් සූදානම්', availDate:'නිශ්චිත දිනයක සිට', availNo:'දැනට නැත', fromDate:'දිනය',
+  showPhone:'පාරිභෝගිකයින්ට මගේ දුරකථන අංකය පෙන්වීමට මම එකඟ වෙමි.', consent:'මගේ තොරතුරු (නම, අංකය, ඡායාරූපය, ආසන්න ප්‍රදේශය) මෙම සේවාව සඳහා භාවිතා කිරීමට එකඟ වෙමි.',
+  publish:'පැතිකඩ ප්‍රකාශ කරන්න', publishing:'ප්‍රකාශ කරමින්...', published:'ඔබේ පැතිකඩ දැන් සෙවිය හැක!', saveLocal:'මෙම දර්ශනයේ හවුල් දත්ත ගබඩාව නොමැත — පැතිකඩ ඔබගේ බ්‍රවුසරයේ පමණක් සුරැකිණි.',
+  aiOff:'AI සේවාව මෙහි ලබාගත නොහැක — සරල ස්වයංක්‍රීය ක්‍රමයක් භාවිතා කළා. කරුණාකර හොඳින් පරීක්ෂා කරන්න.',
+  aiYearsDrop:'AI පළපුරුද්ද අවුරුදු ගණනක් යෝජනා කළ නමුත් එය ඔබේ වචනවල නැත — ඉවත් කළා.',
+  // me
+  myProfile:'මගේ පැතිකඩ', availSwitchOn:'🟢 වැඩ සඳහා සූදානම්', availSwitchOff:'🔴 දැනට වැඩ භාර ගන්නේ නැත', edit:'සංස්කරණය', del:'පැතිකඩ මකන්න', delSure:'ඔබේ පැතිකඩ සම්පූර්ණයෙන් මකන්නද?', yesDel:'ඔව්, මකන්න', cancel:'අවලංගු', deleted:'පැතිකඩ මකා දමන ලදී.',
+  // find
+  findTitle:'කෙනෙක් සොයන්න', whereNeed:'කොහේද?', radius:'දුර', onlyAvail:'දැන් සූදානම් අය පමණක්', onlyPhoto:'ඡායාරූපය ඇති අය පමණක්',
+  results:'ප්‍රතිඵල', none:'ගැළපෙන අය හමු නොවීය.', nearbyT:'ආසන්න ප්‍රදේශවල ඉන්නවා', understood:'AI තේරුම් ගත්තේ', searching:'සොයමින්...',
+  typeSomething:'ඔබට අවශ්‍ය සේවාව ලියන්න හෝ පහතින් තෝරන්න.', km:'කි.මී.', away:'දුරින්', yrs:'අවු. පළපුරුද්ද', match:'ගැළපීම',
+  noCat:'අවශ්‍ය සේවාව හඳුනාගත නොහැකි විය. වෙනත් වචන උත්සාහ කරන්න.', anyTown:'ඕනෑම ප්‍රදේශයක්',
+  why_skill:'කුසලතාව ගැළපේ', why_near:'ආසන්නයි', why_avail:'දැන් සූදානම්', why_exp:'පළපුරුද්ද', why_ver:'තහවුරු කිරීම්',
+  // profile
+  call:'අමතන්න', whatsapp:'WhatsApp', serviceAreas:'සේවා ප්‍රදේශ', verif:'තහවුරු කළ දේ', approx:'ආසන්න ස්ථානය', close:'වසන්න',
+  v_phone_no:'දුරකථන අංකය — තහවුරු කර නැත (මූලාකෘතිය)', v_selfie:'සෙල්ෆි ඡායාරූපයක් ලබා දී ඇත — හැඳුනුම්පතක් සමඟ සසඳා නැත', v_noselfie:'ඡායාරූපයක් නැත', v_id:'හැඳුනුම්පත — පරීක්ෂා කර නැත', v_qual:'සුදුසුකම් — පරීක්ෂා කර නැත',
+  demo:'නියැදි පැතිකඩ', demoNoContact:'මෙය නියැදි (demo) පැතිකඩකි — සම්බන්ධ කර ගත නොහැක.', number:'අංකය', reviews:'ඇගයීම් — ඊළඟ අදියරේදී',
+  // footer
+  foot1:'මූලාකෘතිය (Prototype) — Phase 1 MVP සංකල්පය. නියැදි පැතිකඩ ව්‍යාජයි.', foot2:'ඔබේ නිවසේ නිවැරදි ලිපිනය කිසිවිටෙක පෙන්වන්නේ නැත.',
+ },
+ ta:{
+  hello:'வணக்கம்!', ask:'உங்களுக்கு என்ன சேவை தேவை?', searchPh:'உங்களுக்கு தேவையானதைத் தேடுங்கள்...',
+  findWork:'வேலை தேடுங்கள்', findWorkSub:'என் வேலையை விளம்பரப்படுத்து', findWorker:'ஒருவரைத் தேடுங்கள்', findWorkerSub:'திறமையானவரை விரைவாகக் கண்டுபிடிக்கவும்',
+  speak:'பேசித் தேடுங்கள்', speakSub:'சிங்களம், தமிழ் அல்லது ஆங்கிலத்தில் பேசுங்கள்', tagline:'எந்த வேலைக்கும் ஒருவர், இப்போது உங்கள் போனில்',
+  motto:'சொல்லுங்கள். தேடுங்கள். இணையுங்கள்.', back:'பின்', next:'அடுத்து', popular:'பிரபலமான சேவைகள்',
+  regTitle:'வேலை தேடுங்கள் — பதிவு', step:'படி', name:'உங்கள் பெயர்', namePh:'எ.கா: சுரேஷ் குமார்', phone:'கைபேசி எண்', phonePh:'07X XXX XXXX',
+  phoneBad:'சரியான இலங்கை கைபேசி எண்ணை உள்ளிடவும் (07X XXX XXXX).',
+  otpNote:'இது ஒரு முன்மாதிரி. SMS குறியீடு (OTP) இன்னும் அனுப்பப்படவில்லை — உங்கள் எண் "சரிபார்க்கப்படவில்லை" எனக் காட்டப்படும்.',
+  where:'நீங்கள் எங்கே இருக்கிறீர்கள்?', town:'உங்கள் நகரம்', pickTown:'நகரத்தைத் தேர்ந்தெடுக்கவும்', useGps:'என் இருப்பிடத்தைப் பயன்படுத்து', gpsFail:'இருப்பிடத்தைப் பெற முடியவில்லை. நகரத்தைக் கைமுறையாகத் தேர்ந்தெடுக்கவும்.',
+  areas:'வேலை செய்யும் பகுதிகள்', areasHint:'உங்கள் நகரத்திற்கு அருகிலுள்ள பகுதிகளைத் தேர்ந்தெடுக்கவும். உங்கள் வீட்டு முகவரி ஒருபோதும் காட்டப்படாது.',
+  selfieT:'உங்கள் புகைப்படம் (செல்ஃபி)', selfieHint:'முகம் தெளிவாகத் தெரியும் புகைப்படம் எடுக்கவும். இது அடையாள அட்டை சரிபார்ப்பு அல்ல.', takeSelfie:'புகைப்படம் எடு / தேர்ந்தெடு', retake:'மீண்டும் எடு', skip:'இப்போது தவிர்',
+  describe:'நீங்கள் செய்யும் வேலையைப் பற்றிச் சொல்லுங்கள்', describeHint:'சில எளிய சொற்களை எழுதுங்கள் அல்லது பேசுங்கள். AI அதை தொழில்முறை சுயவிவரமாக மாற்றும்.',
+  describePh:'எ.கா: நான் வீடுகளுக்கு வர்ணம் பூசுகிறேன். 8 ஆண்டு அனுபவம். கொழும்பு மற்றும் கம்பஹா பகுதிகளில் வேலை செய்கிறேன்.',
+  example:'உதாரணத்தைப் பயன்படுத்து', makeProfile:'AI மூலம் சுயவிவரம் உருவாக்கு', making:'உருவாக்குகிறது...',
+  review:'உங்கள் சுயவிவரத்தைச் சரிபாருங்கள்', reviewHint:'AI எழுதியது சரியா எனப் பாருங்கள். எதையும் மாற்றலாம்.', occupation:'முக்கிய தொழில்', skills:'திறன்கள்', skillsHint:'காற்புள்ளியால் பிரிக்கவும்',
+  years:'அனுபவம் (ஆண்டுகள்)', yearsNone:'நீங்கள் அனுபவத்தைக் குறிப்பிடவில்லை — தேவைப்பட்டால் உள்ளிடவும்.', yearsFrom:'உங்கள் சொற்களிலிருந்து எடுக்கப்பட்டது',
+  desc:'விவரம்', orig:'நீங்கள் சொன்னது (மூலம்)', suggest:'AI பரிந்துரைக்கும் கூடுதல் திறன்கள்', suggestHint:'நீங்கள் உண்மையில் செய்பவற்றை மட்டும் தேர்ந்தெடுக்கவும்.', readAloud:'சத்தமாக வாசி',
+  noVoice:'இந்தச் சாதனத்தில்/உலாவியில் குரல் கிடைக்கவில்லை. தயவுசெய்து தட்டச்சு செய்யவும்.', listening:'கேட்கிறது... பேசுங்கள்',
+  avail:'நீங்கள் வேலைக்குத் தயாரா?', availNow:'இப்போது தயார்', availDate:'குறிப்பிட்ட தேதியிலிருந்து', availNo:'இப்போது இல்லை', fromDate:'தேதி',
+  showPhone:'என் தொலைபேசி எண்ணை வாடிக்கையாளர்களுக்குக் காட்ட ஒப்புக்கொள்கிறேன்.', consent:'என் தகவல்களை (பெயர், எண், புகைப்படம், தோராயமான பகுதி) இந்தச் சேவைக்குப் பயன்படுத்த ஒப்புக்கொள்கிறேன்.',
+  publish:'சுயவிவரத்தை வெளியிடு', publishing:'வெளியிடுகிறது...', published:'உங்கள் சுயவிவரம் இப்போது தேடக்கூடியது!', saveLocal:'பகிரப்பட்ட தரவுத்தளம் இங்கு இல்லை — சுயவிவரம் உங்கள் உலாவியில் மட்டும் சேமிக்கப்பட்டது.',
+  aiOff:'AI சேவை இங்கு கிடைக்கவில்லை — எளிய தானியங்கி முறை பயன்படுத்தப்பட்டது. நன்றாகச் சரிபாருங்கள்.',
+  aiYearsDrop:'AI அனுபவ ஆண்டுகளைப் பரிந்துரைத்தது, ஆனால் அது உங்கள் சொற்களில் இல்லை — நீக்கப்பட்டது.',
+  myProfile:'என் சுயவிவரம்', availSwitchOn:'🟢 வேலைக்குத் தயார்', availSwitchOff:'🔴 இப்போது வேலை ஏற்கவில்லை', edit:'திருத்து', del:'சுயவிவரத்தை நீக்கு', delSure:'உங்கள் சுயவிவரத்தை முழுமையாக நீக்கவா?', yesDel:'ஆம், நீக்கு', cancel:'ரத்து', deleted:'சுயவிவரம் நீக்கப்பட்டது.',
+  findTitle:'ஒருவரைத் தேடுங்கள்', whereNeed:'எங்கே?', radius:'தூரம்', onlyAvail:'இப்போது தயாரானவர்கள் மட்டும்', onlyPhoto:'புகைப்படம் உள்ளவர்கள் மட்டும்',
+  results:'முடிவுகள்', none:'பொருத்தமானவர்கள் கிடைக்கவில்லை.', nearbyT:'அருகிலுள்ள பகுதிகளில் உள்ளனர்', understood:'AI புரிந்துகொண்டது', searching:'தேடுகிறது...',
+  typeSomething:'தேவையான சேவையை எழுதுங்கள் அல்லது கீழே தேர்ந்தெடுக்கவும்.', km:'கி.மீ.', away:'தொலைவில்', yrs:'ஆண்டு அனுபவம்', match:'பொருத்தம்',
+  noCat:'தேவையான சேவையை அடையாளம் காண முடியவில்லை. வேறு சொற்களை முயற்சிக்கவும்.', anyTown:'எந்தப் பகுதியும்',
+  why_skill:'திறன் பொருந்துகிறது', why_near:'அருகில்', why_avail:'இப்போது தயார்', why_exp:'அனுபவம்', why_ver:'சரிபார்ப்புகள்',
+  call:'அழை', whatsapp:'WhatsApp', serviceAreas:'சேவைப் பகுதிகள்', verif:'சரிபார்க்கப்பட்டவை', approx:'தோராயமான இடம்', close:'மூடு',
+  v_phone_no:'தொலைபேசி எண் — சரிபார்க்கப்படவில்லை (முன்மாதிரி)', v_selfie:'செல்ஃபி வழங்கப்பட்டது — அடையாள அட்டையுடன் ஒப்பிடப்படவில்லை', v_noselfie:'புகைப்படம் இல்லை', v_id:'அடையாள அட்டை — சரிபார்க்கப்படவில்லை', v_qual:'தகுதிகள் — சரிபார்க்கப்படவில்லை',
+  demo:'மாதிரி சுயவிவரம்', demoNoContact:'இது மாதிரி (demo) சுயவிவரம் — தொடர்பு கொள்ள முடியாது.', number:'எண்', reviews:'மதிப்பீடுகள் — அடுத்த கட்டத்தில்',
+  foot1:'முன்மாதிரி (Prototype) — Phase 1 MVP கருத்து. மாதிரி சுயவிவரங்கள் கற்பனையானவை.', foot2:'உங்கள் வீட்டின் சரியான முகவரி ஒருபோதும் காட்டப்படாது.',
+ },
+ en:{
+  hello:'Ayubowan!', ask:'What service do you need?', searchPh:'Search for what you need...',
+  findWork:'Find work', findWorkSub:'Advertise my work', findWorker:'Find a worker', findWorkerSub:'Find a skilled person quickly',
+  speak:'Tap to speak', speakSub:'Speak in Sinhala, Tamil or English', tagline:'A person for any job, now on your phone',
+  motto:'Just Speak. Find. Connect.', back:'Back', next:'Next', popular:'Popular services',
+  regTitle:'Find work — registration', step:'Step', name:'Your name', namePh:'e.g. Sunil Perera', phone:'Mobile number', phonePh:'07X XXX XXXX',
+  phoneBad:'Enter a valid Sri Lankan mobile number (07X XXX XXXX).',
+  otpNote:'This is a prototype. No SMS code (OTP) is sent yet — your number will show as "not verified".',
+  where:'Where are you?', town:'Your town', pickTown:'Choose a town', useGps:'Use my location', gpsFail:'Could not get your location. Please choose your town manually.',
+  areas:'Areas where you take work', areasHint:'Choose areas near your town. Your home address is never shown.',
+  selfieT:'Your photo (selfie)', selfieHint:'Take a photo where your face is clear. This is not an ID check.', takeSelfie:'Take / choose photo', retake:'Retake', skip:'Skip for now',
+  describe:'Tell us about your work', describeHint:'Type or say a few simple words. AI turns it into a professional profile.',
+  describePh:'e.g. I paint houses. 8 years of experience. I work in Colombo and Gampaha.',
+  example:'Use the example', makeProfile:'Create profile with AI', making:'Creating profile...',
+  review:'Check your profile', reviewHint:'Check that what AI wrote is correct. You can change anything.', occupation:'Main occupation', skills:'Skills', skillsHint:'Separate with commas',
+  years:'Experience (years)', yearsNone:'You did not mention experience — add it if you want.', yearsFrom:'Taken from your words',
+  desc:'Description', orig:'What you said (original)', suggest:'Extra skills suggested by AI', suggestHint:'Only tick the ones you really do.', readAloud:'Read aloud',
+  noVoice:'Voice is not available on this device/browser. Please type instead.', listening:'Listening... speak now',
+  avail:'Are you available for work?', availNow:'Available now', availDate:'From a specific date', availNo:'Not available', fromDate:'Date',
+  showPhone:'I agree to show my phone number to customers.', consent:'I agree my details (name, number, photo, approximate area) are used for this service.',
+  publish:'Publish profile', publishing:'Publishing...', published:'Your profile is now searchable!', saveLocal:'No shared database in this view — profile saved in your browser only.',
+  aiOff:'AI is not available here — a simple automatic method was used. Please check carefully.',
+  aiYearsDrop:'AI suggested a number of years that is not in your words — removed.',
+  myProfile:'My profile', availSwitchOn:'🟢 Available for work', availSwitchOff:'🔴 Not currently available', edit:'Edit', del:'Delete profile', delSure:'Delete your profile completely?', yesDel:'Yes, delete', cancel:'Cancel', deleted:'Profile deleted.',
+  findTitle:'Find a worker', whereNeed:'Where?', radius:'Distance', onlyAvail:'Available now only', onlyPhoto:'With photo only',
+  results:'Results', none:'No matching workers found.', nearbyT:'Found in nearby areas', understood:'AI understood', searching:'Searching...',
+  typeSomething:'Type the service you need or choose below.', km:'km', away:'away', yrs:'yrs experience', match:'match',
+  noCat:'Could not identify the service. Try other words.', anyTown:'Any area',
+  why_skill:'Skill match', why_near:'Nearby', why_avail:'Available now', why_exp:'Experience', why_ver:'Verification',
+  call:'Call', whatsapp:'WhatsApp', serviceAreas:'Service areas', verif:'What has been checked', approx:'Approximate location', close:'Close',
+  v_phone_no:'Phone number — not verified (prototype)', v_selfie:'Selfie provided — not matched to an ID', v_noselfie:'No photo', v_id:'ID — not checked', v_qual:'Qualifications — not checked',
+  demo:'Sample profile', demoNoContact:'This is a sample (demo) profile — cannot be contacted.', number:'Number', reviews:'Reviews — coming in next phase',
+  foot1:'Prototype — Phase 1 MVP concept. Sample profiles are fictional.', foot2:'A worker’s exact home address is never shown.',
+ }
+};
+
+// ---------- Service categories (multilingual + Singlish keywords) ----------
+const CATS = [
+ {id:'painter',e:'🖌️',si:'පින්තාරු කරන්නා',ta:'வர்ணம் பூசுபவர்',en:'Painter',k:['පින්තාරු','පින්තාර','පේන්ට්','පෙයින්ට්','තීන්ත','paint','painter','painting','pinthaaru','pintharu','pinthaaruwa','wall paint','வர்ணம்','பெயிண்ட்']},
+ {id:'mason',e:'🧱',si:'මේසන් / බාස්',ta:'கொத்தனார்',en:'Mason / Builder',k:['මේසන්','බාස්','බාසුන්නැහේ','ගෙයක් හදන්න','ගෙයක් හද','ගෙවල් හදන','ගඩොල්','බිත්ති බඳින','කොන්ක්‍රීට්','ඉදිකිරීම්','mason','masonry','baas','bass','bas','builder','construction','concrete','geyak hadanna','கொத்தனார்','மேசன்','கட்டுமான']},
+ {id:'carpenter',e:'🪚',si:'වඩු කාර්මික',ta:'தச்சர்',en:'Carpenter',k:['වඩු','වඩුවා','ලී වැඩ','ලී බඩු','ෆර්නිචර්','carpenter','carpentry','wadu','vadu','furniture','woodwork','தச்சர்','மரவேலை']},
+ {id:'electrician',e:'💡',si:'විදුලි කාර්මික',ta:'மின் தொழிலாளி',en:'Electrician',k:['විදුලි','වයරින්','වයර්','ඉලෙක්ට්‍රීෂන්','ඉලෙක්ට්‍රිෂන්','ලයිට්','ස්විච්','electrician','electrical','electric','wiring','wayarin','wiring work','current','மின்','வயரிங்','எலக்ட்ரீஷியன்']},
+ {id:'plumber',e:'🚰',si:'ජලනල කාර්මික',ta:'குழாய் பொருத்துநர்',en:'Plumber',k:['ජලනල','ප්ලම්බර්','ප්ලම්බින්','වතුර කාන්දු','වතුර බට','ටැප්','ටැංකි','plumber','plumbing','pipe','pipes','leak','tap','water leak','wathura','plambar','குழாய்','பிளம்பர்']},
+ {id:'ac',e:'❄️',si:'AC කාර්මික',ta:'ஏசி தொழில்நுட்பர்',en:'AC technician',k:['ඒසී','එයාකන්','එයාර්කන්','වායු සමීකරණ','වායුසමීකරණ','ac','a/c','aircon','air condition','air conditioner','air conditioning','eyakan','ஏசி','குளிரூட்டி']},
+ {id:'appliance',e:'🔌',si:'උපකරණ අලුත්වැඩියා',ta:'சாதனப் பழுதுபார்ப்பு',en:'Appliance repair',k:['ශීතකරණ','ෆ්‍රිජ්','ෆ්‍රීජ්','රෙදි සෝදන','වොෂින් මැෂින්','රූපවාහිනී','ටීවී','fridge','refrigerator','washing machine','tv repair','appliance','oven','frij','குளிர்சாதன','சலவை இயந்திர']},
+ {id:'welder',e:'🔥',si:'වෙල්ඩින් කාර්මික',ta:'வெல்டர்',en:'Welder',k:['වෙල්ඩින්','වෙල්ඩර්','ග්‍රිල්','ගේට්ටු','welder','welding','grill','gate','fabrication','weldin','வெல்டிங்','வெல்டர்']},
+ {id:'mechanic',e:'🔧',si:'වාහන කාර්මික',ta:'மெக்கானிக்',en:'Mechanic',k:['මැකැනික්','මෙකැනික්','වාහන අලුත්වැඩියා','ගරාජ්','එන්ජින්','mechanic','car repair','garage','bike repair','vehicle repair','engine','mekanik','மெக்கானிக்']},
+ {id:'driver',e:'🚗',si:'රියදුරු',ta:'ஓட்டுநர்',en:'Driver',k:['රියදුරු','ඩ්‍රයිවර්','ඩ්‍රයිවර්','driver','driving','chauffeur','draiwar','ஓட்டுநர்','டிரைவர்']},
+ {id:'machine',e:'🚜',si:'යන්ත්‍ර ක්‍රියාකරු',ta:'இயந்திர இயக்குநர்',en:'Machine operator',k:['බැකෝ','ජේසීබී','යන්ත්‍ර ක්‍රියාකරු','machine operator','excavator','backhoe','jcb','backo','இயந்திர இயக்கு']},
+ {id:'tiler',e:'🔲',si:'ටයිල් කාර්මික',ta:'டைல் பொருத்துநர்',en:'Tiler',k:['ටයිල්','tile','tiles','tiling','tiler','டைல்']},
+ {id:'gardener',e:'🌿',si:'ගෙවතු වැඩ',ta:'தோட்டக்காரர்',en:'Gardener',k:['ගෙවත්ත','ගෙවතු','වත්ත','උයන','තණකොළ','ගස් කපන','gardener','garden','gardening','grass cutting','lawn','waththa','தோட்ட']},
+ {id:'cleaner',e:'🧹',si:'පිරිසිදු කිරීම්',ta:'சுத்தம் செய்பவர்',en:'Cleaner',k:['පිරිසිදු','ක්ලීනින්','අතුගාන','cleaner','cleaning','housekeeping','சுத்தம்']},
+ {id:'domestic',e:'🏠',si:'ගෘහ සේවා',ta:'வீட்டு வேலை',en:'Domestic helper',k:['ගෘහ සේවා','ගෙදර වැඩ','domestic','housemaid','maid','house help','வீட்டு வேலை']},
+ {id:'caregiver',e:'🤝',si:'රැකබලා ගන්නා',ta:'பராமரிப்பாளர்',en:'Caregiver',k:['රැකබලා','සාත්තු','වැඩිහිටි රැක','ළමා රැක','caregiver','care giver','elder care','babysitter','nanny','பராமரிப்பு']},
+ {id:'tutor',e:'📚',si:'ටියුෂන් / ගුරු',ta:'ஆசிரியர்',en:'Tutor',k:['ටියුෂන්','ගුරු','පන්ති','උගන්වන','tutor','tuition','teacher','lessons','ஆசிரியர்','டியூஷன்']},
+ {id:'engineer',e:'📐',si:'ඉංජිනේරු',ta:'பொறியாளர்',en:'Engineer',k:['ඉංජිනේරු','ඉන්ජිනියර්','engineer','structural','civil engineer','injiniyar','பொறியாளர்']},
+ {id:'architect',e:'🏛️',si:'ගෘහ නිර්මාණ ශිල්පී',ta:'கட்டிடக் கலைஞர்',en:'Architect',k:['ගෘහ නිර්මාණ','ආකිටෙක්','ගෙදර ප්ලෑන්','architect','house plan','building plan','கட்டிடக்கலை']},
+ {id:'qs',e:'🧮',si:'ප්‍රමාණ සමීක්ෂක',ta:'அளவையாளர்',en:'Quantity surveyor',k:['ප්‍රමාණ සමීක්ෂක','ක්වන්ටිටි','qs','quantity surveyor','boq','cost estimate','அளவையாளர்']},
+ {id:'it',e:'💻',si:'IT / පරිගණක',ta:'கணினி / IT',en:'IT specialist',k:['පරිගණක','කොම්පියුටර්','ලැප්ටොප්','වෙබ් අඩවි','සොෆ්ට්වෙයා','it','computer','laptop','software','website','network','கணினி']},
+ {id:'designer',e:'🎨',si:'ග්‍රැෆික් නිර්මාණ',ta:'வரைகலை வடிவமைப்பாளர்',en:'Graphic designer',k:['ග්‍රැෆික්','ලාංඡන','ඩිසයින්','graphic','graphic design','designer','logo','poster','வடிவமை']},
+];
+const CAT = Object.fromEntries(CATS.map(c=>[c.id,c]));
+
+// ---------- Towns (approximate coordinates; for distance ranking only) ----------
+// [id, Sinhala, English, Tamil|null, district, lat, lng, extra Singlish spellings]
+const TOWNS_RAW = [
+ ['colombo','කොළඹ','Colombo','கொழும்பு','Colombo',6.9271,79.8612,['kolamba','colmbo']],
+ ['dehiwala','දෙහිවල','Dehiwala',null,'Colombo',6.8511,79.8659,['dehiwela']],
+ ['nugegoda','නුගේගොඩ','Nugegoda',null,'Colombo',6.8649,79.8997,[]],
+ ['maharagama','මහරගම','Maharagama',null,'Colombo',6.8480,79.9265,[]],
+ ['battaramulla','බත්තරමුල්ල','Battaramulla',null,'Colombo',6.9020,79.9180,[]],
+ ['malabe','මාලබේ','Malabe',null,'Colombo',6.9061,79.9580,[]],
+ ['kaduwela','කඩුවෙල','Kaduwela',null,'Colombo',6.9333,79.9833,['kaduwala']],
+ ['athurugiriya','අතුරුගිරිය','Athurugiriya',null,'Colombo',6.8733,79.9978,['aturugiriya']],
+ ['homagama','හෝමාගම','Homagama',null,'Colombo',6.8441,80.0024,[]],
+ ['avissawella','අවිස්සාවේල්ල','Avissawella',null,'Colombo',6.9553,80.2100,[]],
+ ['moratuwa','මොරටුව','Moratuwa',null,'Colombo',6.7730,79.8816,[]],
+ ['gampaha','ගම්පහ','Gampaha','கம்பஹா','Gampaha',7.0917,79.9999,['gampah']],
+ ['kelaniya','කැලණිය','Kelaniya',null,'Gampaha',6.9553,79.9220,[]],
+ ['kiribathgoda','කිරිබත්ගොඩ','Kiribathgoda',null,'Gampaha',6.9800,79.9300,['kiribatgoda']],
+ ['kadawatha','කඩවත','Kadawatha',null,'Gampaha',7.0010,79.9530,['kadawata']],
+ ['ragama','රාගම','Ragama',null,'Gampaha',7.0280,79.9200,[]],
+ ['jaela','ජා-ඇල','Ja-Ela',null,'Gampaha',7.0744,79.8919,['ja ela','jaela']],
+ ['negombo','මීගමුව','Negombo','நீர்கொழும்பு','Gampaha',7.2083,79.8358,['meegamuwa']],
+ ['minuwangoda','මිනුවන්ගොඩ','Minuwangoda',null,'Gampaha',7.1667,79.9500,[]],
+ ['panadura','පානදුර','Panadura',null,'Kalutara',6.7133,79.9042,[]],
+ ['kalutara','කළුතර','Kalutara','களுத்துறை','Kalutara',6.5854,79.9607,['kaluthara']],
+ ['horana','හොරණ','Horana',null,'Kalutara',6.7159,80.0626,[]],
+ ['kandy','මහනුවර','Kandy','கண்டி','Kandy',7.2906,80.6337,['mahanuwara','nuwara']],
+ ['matale','මාතලේ','Matale','மாத்தளை','Matale',7.4675,80.6234,[]],
+ ['nuwaraeliya','නුවරඑළිය','Nuwara Eliya','நுவரெலியா','Nuwara Eliya',6.9497,80.7891,['nuwara eliya']],
+ ['kurunegala','කුරුණෑගල','Kurunegala','குருநாகல்','Kurunegala',7.4863,80.3647,['kurunagala']],
+ ['puttalam','පුත්තලම','Puttalam','புத்தளம்','Puttalam',8.0362,79.8283,[]],
+ ['chilaw','හලාවත','Chilaw',null,'Puttalam',7.5758,79.7953,['halawatha']],
+ ['anuradhapura','අනුරාධපුරය','Anuradhapura','அனுராதபுரம்','Anuradhapura',8.3114,80.4037,[]],
+ ['polonnaruwa','පොළොන්නරුව','Polonnaruwa','பொலன்னறுவை','Polonnaruwa',7.9403,81.0188,[]],
+ ['kegalle','කෑගල්ල','Kegalle','கேகாலை','Kegalle',7.2513,80.3464,['kegalla']],
+ ['ratnapura','රත්නපුර','Ratnapura','இரத்தினபுரி','Ratnapura',6.6828,80.3992,['rathnapura']],
+ ['badulla','බදුල්ල','Badulla','பதுளை','Badulla',6.9934,81.0550,[]],
+ ['monaragala','මොණරාගල','Monaragala','மொனராகலை','Monaragala',6.8728,81.3507,['moneragala']],
+ ['galle','ගාල්ල','Galle','காலி','Galle',6.0535,80.2210,['galla']],
+ ['matara','මාතර','Matara','மாத்தறை','Matara',5.9549,80.5550,['mathara']],
+ ['hambantota','හම්බන්තොට','Hambantota','அம்பாந்தோட்டை','Hambantota',6.1241,81.1185,[]],
+ ['jaffna','යාපනය','Jaffna','யாழ்ப்பாணம்','Jaffna',9.6615,80.0255,['yapanaya']],
+ ['kilinochchi','කිලිනොච්චිය','Kilinochchi','கிளிநொச்சி','Kilinochchi',9.3803,80.3770,[]],
+ ['mannar','මන්නාරම','Mannar','மன்னார்','Mannar',8.9810,79.9044,[]],
+ ['vavuniya','වවුනියාව','Vavuniya','வவுனியா','Vavuniya',8.7514,80.4971,[]],
+ ['mullaitivu','මුලතිව්','Mullaitivu','முல்லைத்தீவு','Mullaitivu',9.2671,80.8142,[]],
+ ['trincomalee','ත්‍රිකුණාමලය','Trincomalee','திருகோணமலை','Trincomalee',8.5874,81.2152,['trinco']],
+ ['batticaloa','මඩකලපුව','Batticaloa','மட்டக்களப்பு','Batticaloa',7.7310,81.6747,['madakalapuwa']],
+ ['ampara','අම්පාර','Ampara','அம்பாறை','Ampara',7.2975,81.6820,[]],
+];
+const TOWNS = TOWNS_RAW.map(r=>({id:r[0],si:r[1],en:r[2],ta:r[3]||r[2],district:r[4],lat:r[5],lng:r[6],alt:r[7]}));
+const TOWN = Object.fromEntries(TOWNS.map(t=>[t.id,t]));
+
+// ---------- Sample (fictional) profiles, clearly labelled as demo ----------
+const DEMO = [
+ {id:'demo1',name:'Sunil Perera',cats:['painter'],skills:['House painting','Wall putty','Waterproof coating'],years:8,town:'kaduwela',areas:['malabe','battaramulla','athurugiriya'],avail:'now',
+  desc:{si:'නිවාස ඇතුළත සහ පිටත පින්තාරු කිරීම, බිත්ති පුට්ටි කිරීම සිදු කරමි. වසර 8ක පළපුරුද්දක් ඇත.',en:'Interior and exterior house painting and wall puttying. 8 years of experience.',ta:'வீட்டின் உள் மற்றும் வெளிப்புற வர்ணம் பூசுதல், சுவர் புட்டி. 8 ஆண்டு அனுபவம்.'}},
+ {id:'demo2',name:'Kamal Jayasinghe',cats:['painter','tiler'],skills:['Painting','Floor tiling'],years:12,town:'gampaha',areas:['kadawatha','ragama','minuwangoda'],avail:'date',availDate:'2026-11-20',
+  desc:{si:'පින්තාරු සහ ටයිල් ඇල්ලීමේ වැඩ කරමි.',en:'Painting and floor tiling work.',ta:'வர்ணம் பூசுதல் மற்றும் டைல் பொருத்தும் வேலை.'}},
+ {id:'demo3',name:'Nimal Bandara',cats:['mason'],skills:['House construction','Brickwork','Plastering'],years:15,town:'homagama',areas:['maharagama','athurugiriya','kaduwela'],avail:'now',
+  desc:{si:'නිවාස ඉදිකිරීම්, ගඩොල් බැඳීම සහ කපරාරු වැඩ.',en:'House construction, brickwork and plastering.',ta:'வீடு கட்டுமானம், செங்கல் வேலை மற்றும் பூச்சு.'}},
+ {id:'demo4',name:'Ruwan Silva',cats:['electrician'],skills:['House wiring','Fault finding','Solar connection'],years:6,town:'malabe',areas:['kaduwela','battaramulla','nugegoda'],avail:'now',
+  desc:{si:'ගෘහ විදුලි රැහැන් ඇදීම සහ දෝෂ සෙවීම.',en:'House wiring and electrical fault finding.',ta:'வீட்டு மின் வயரிங் மற்றும் பழுது கண்டறிதல்.'}},
+ {id:'demo5',name:'Fazal Mohamed',cats:['ac','appliance'],skills:['AC installation','AC service','Fridge repair'],years:9,town:'dehiwala',areas:['colombo','nugegoda','moratuwa'],avail:'now',
+  desc:{si:'AC සවි කිරීම, සේවා කිරීම සහ ශීතකරණ අලුත්වැඩියා.',en:'AC installation and servicing, fridge repair.',ta:'ஏசி பொருத்துதல், சேவை மற்றும் குளிர்சாதன பழுதுபார்ப்பு.'}},
+ {id:'demo6',name:'Suresh Kumar',cats:['plumber'],skills:['Pipe fitting','Leak repair','Water tank installation'],years:null,town:'kiribathgoda',areas:['kelaniya','kadawatha'],avail:'off',
+  desc:{si:'ජල නල සවි කිරීම සහ කාන්දු අලුත්වැඩියා.',en:'Pipe fitting and leak repairs.',ta:'குழாய் பொருத்துதல் மற்றும் கசிவு பழுதுபார்ப்பு.'}},
+ {id:'demo7',name:'Lalith Wickramasinghe',cats:['carpenter'],skills:['Doors and windows','Roof timber','Furniture repair'],years:20,town:'kandy',areas:['matale'],avail:'now',
+  desc:{si:'දොර ජනෙල්, වහල ලී වැඩ සහ ෆර්නිචර් අලුත්වැඩියා.',en:'Doors, windows, roof timber and furniture repair.',ta:'கதவு, ஜன்னல், கூரை மரவேலை மற்றும் தளபாட பழுது.'}},
+ {id:'demo8',name:'Priyantha Fernando',cats:['welder'],skills:['Gates','Window grills','Steel roofing frames'],years:10,town:'negombo',areas:['jaela','minuwangoda'],avail:'now',
+  desc:{si:'ගේට්ටු, ජනෙල් ග්‍රිල් සහ වහල යකඩ රාමු.',en:'Gates, window grills and steel roof frames.',ta:'கேட், ஜன்னல் கிரில் மற்றும் இரும்புக் கூரை சட்டங்கள்.'}},
+ {id:'demo9',name:'Chaminda Rathnayake',cats:['electrician','ac'],skills:['Wiring','AC service'],years:4,town:'galle',areas:['matara'],avail:'now',
+  desc:{si:'විදුලි රැහැන් සහ AC සේවා.',en:'Wiring and AC servicing.',ta:'வயரிங் மற்றும் ஏசி சேவை.'}},
+ {id:'demo10',name:'Tharindu Senanayake',cats:['painter'],skills:['Exterior painting'],years:3,town:'horana',areas:['panadura'],avail:'now',
+  desc:{si:'නිවාස පිටත පින්තාරු කිරීම.',en:'Exterior house painting.',ta:'வீட்டின் வெளிப்புற வர்ணம் பூசுதல்.'}},
+].map(w=>({...w,demo:true,selfie:null,phone:null,showPhone:false,verif:{phone:false,selfie:false}}));
+
+// ---------- State ----------
+const S = {
+ lang:'si', view:'home',
+ db:null, user:null, sample:null, uid:null, canWrite:null,
+ shared:[], sharedState:'loading', // loading|ok|slow|off
+ me:null,
+ reg:null, regStep:0,
+ q:{text:'',town:'',radius:25,onlyAvail:false,onlyPhoto:false,cats:[],aiNote:'',busy:false,ran:false},
+};
+try{const l=localStorage.getItem('mn_lang'); if(l&&T[l]) S.lang=l;}catch(e){}
+const t = k => (T[S.lang][k] ?? T.en[k] ?? k);
+const $ = s => document.querySelector(s);
+const esc = s => String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const tn = id => { const x=TOWN[id]; return x ? x[S.lang] : ''; };
+const cn = id => { const c=CAT[id]; return c ? c[S.lang] : id; };
+
+// ---------- Text matching ----------
+function norm(s){ return String(s||'').toLowerCase().replace(/[‌‍]/g,'').replace(/\s+/g,' ').trim(); }
+function latinTokens(s){ return (norm(s).match(/[a-z0-9\/]+/g)||[]); }
+function lev(a,b){ if(a===b) return 0; const m=a.length,n=b.length; if(Math.abs(m-n)>1) return 2;
+  let p=Array.from({length:n+1},(_,i)=>i);
+  for(let i=1;i<=m;i++){ const c=[i]; for(let j=1;j<=n;j++) c[j]=Math.min(p[j]+1,c[j-1]+1,p[j-1]+(a[i-1]===b[j-1]?0:1)); p=c; }
+  return p[n]; }
+const isLatin = k => /^[\x00-\x7f]+$/.test(k);
+function kwHit(text, toks, kw){
+  const k = norm(kw);
+  if(!isLatin(k)) return text.includes(k);
+  if(k.includes(' ')) return (' '+toks.join(' ')+' ').includes(' '+k+' ');
+  if(toks.includes(k)) return true;
+  if(k.length>=5) return toks.some(x=>x.length>=4 && lev(x,k)<=1);
+  return false;
+}
+function detectCats(q){
+  const text=norm(q), toks=latinTokens(q); const hits=[];
+  for(const c of CATS){ if(c.k.some(kw=>kwHit(text,toks,kw))) hits.push(c.id); }
+  return hits;
+}
+function detectTowns(q){
+  const text=norm(q), toks=latinTokens(q); const hits=[];
+  for(const x of TOWNS){
+    const names=[x.si,x.ta,x.en.toLowerCase(),...x.alt];
+    if(names.some(nm=>nm && kwHit(text,toks,nm))) hits.push(x.id);
+  }
+  return hits;
+}
+function extractYears(s){
+  const txt=norm(s);
+  const re=[/(\d{1,2})\s*(?:ක|ක්)?\s*(?:අවුරුදු|වසර|years?|yrs?|avurudu|awurudu|ஆண்டு|வருட)/, /(?:අවුරුදු|වසර|avurudu|awurudu)\s*(\d{1,2})/];
+  for(const r of re){ const m=txt.match(r); if(m) return +m[1]; }
+  return null;
+}
+function km(a,b){ const R=6371,toR=Math.PI/180; const dl=(b.lat-a.lat)*toR, dg=(b.lng-a.lng)*toR;
+  const h=Math.sin(dl/2)**2+Math.cos(a.lat*toR)*Math.cos(b.lat*toR)*Math.sin(dg/2)**2; return 2*R*Math.asin(Math.sqrt(h)); }
+function nearestTown(lat,lng){ let best=null,bd=1e9; for(const x of TOWNS){ const d=km({lat,lng},x); if(d<bd){bd=d;best=x;} } return best; }
+
+// ---------- Ranking ----------
+function allWorkers(){
+  const map=new Map();
+  for(const w of DEMO) map.set(w.id,w);
+  for(const w of S.shared) map.set(w.id,w);
+  if(S.me && !map.has(S.me.id)) map.set(S.me.id,S.me);
+  return [...map.values()];
+}
+function rankWorkers(cats, townId, radius, opts={}){
+  const base = townId ? TOWN[townId] : null;
+  const out=[];
+  for(const w of allWorkers()){
+    if(cats.length && !w.cats.some(c=>cats.includes(c))) continue;
+    if(opts.onlyAvail && w.avail!=='now') continue;
+    if(opts.onlyPhoto && !w.selfie) continue;
+    let dist=null;
+    if(base){ const pts=[w.town,...(w.areas||[])].map(id=>TOWN[id]).filter(Boolean); if(pts.length) dist=Math.min(...pts.map(p=>km(base,p))); }
+    const why=[]; let s=0;
+    if(cats.length){ const primary=cats.includes(w.cats[0]); s+=primary?40:32; why.push('why_skill'); } else s+=20;
+    if(base && dist!=null){ const r=Math.max(radius,5); const ds=dist<=r ? 25*(1-dist/(r*1.6)) : Math.max(0,8*(1-(dist-r)/50)); s+=ds; if(dist<=Math.min(10,r)) why.push('why_near'); }
+    else s+=10;
+    if(w.avail==='now'){ s+=15; why.push('why_avail'); } else if(w.avail==='date') s+=8;
+    const v=(w.verif?.phone?4:0)+(w.verif?.selfie?3:0)+(w.selfie?3:0); s+=v; if(v>=3) why.push('why_ver');
+    if(w.years){ s+=Math.min(w.years,15)/15*10; if(w.years>=5) why.push('why_exp'); }
+    out.push({w,dist,score:Math.round(Math.min(s,100)),why});
+  }
+  out.sort((a,b)=>b.score-a.score || (a.dist??999)-(b.dist??999));
+  if(!base) return {inside:out,outside:[]};
+  return {inside:out.filter(r=>r.dist!=null && r.dist<=radius), outside:out.filter(r=>r.dist==null || r.dist>radius).sort((a,b)=>(a.dist??999)-(b.dist??999)).slice(0,5)};
+}
+
+// ---------- AI helpers ----------
+async function aiJSON(prompt){
+  if(!S.sample) throw {code:'none'};
+  const fn = typeof S.sample.json==='function' ? S.sample.json : null;
+  if(fn){ return await fn(prompt,{modelTier:'default'}); }
+  const r = await S.sample(prompt,{modelTier:'default'});
+  const m = String(r.text||'').match(/\{[\s\S]*\}/); if(!m) throw {code:'parse'};
+  return JSON.parse(m[0]);
+}
+const CAT_LIST = CATS.map(c=>`${c.id} (${c.en})`).join(', ');
+const TOWN_LIST = TOWNS.map(x=>`${x.id}=${x.en}`).join(', ');
+
+async function buildProfile(text, baseTown){
+  const local = localProfile(text, baseTown);
+  let p = null, usedAI=false, notes=[];
+  try{
+    const prompt = `You help a Sri Lankan worker create a marketplace profile for Minissu.lk. The worker described their work in their own words (may be Sinhala, Tamil, English, Singlish or mixed):
+"""${text.slice(0,1500)}"""
+Their base town: ${TOWN[baseTown]?.en||'unknown'}.
+
+Return ONLY a JSON object with these keys:
+{"categories":[category ids],"skills":[short skill phrases in English, max 6],"years_experience":number or null,"service_areas":[town ids],"description_si":"...","description_en":"...","description_ta":"...","suggested_skills":[max 4 related skills in English],"needs_confirming":[short notes in English]}
+
+Strict rules:
+- Use ONLY facts the worker stated. Never invent years, qualifications, certificates, licences, company names, prices or quality claims.
+- years_experience is null unless the worker stated a number of years.
+- categories: choose only from: ${CAT_LIST}.
+- service_areas: choose only from these town ids, and only places the worker mentioned (a district name like Gampaha maps to its town id): ${TOWN_LIST}.
+- Descriptions: 2 short plain sentences each, everyday words, no superlatives, written as the worker's service description. Sinhala in Sinhala script, Tamil in Tamil script.
+- suggested_skills are optional ideas shown to the worker for approval; do not include them in skills.`;
+    const r = await aiJSON(prompt);
+    if(r && typeof r==='object'){
+      usedAI=true;
+      const cats=(Array.isArray(r.categories)?r.categories:[]).filter(id=>CAT[id]);
+      const areas=(Array.isArray(r.service_areas)?r.service_areas:[]).filter(id=>TOWN[id] && id!==baseTown);
+      let years = Number.isFinite(+r.years_experience) && r.years_experience!==null ? Math.round(+r.years_experience) : null;
+      // provenance check: the number must appear in the worker's own words
+      if(years!=null && !new RegExp('(^|\\D)'+years+'(\\D|$)').test(text)){ years=null; notes.push('aiYearsDrop'); }
+      p = {
+        cats: cats.length?cats:local.cats,
+        skills:(Array.isArray(r.skills)?r.skills:[]).map(String).slice(0,6),
+        years: years ?? local.years,
+        areas: areas.length?areas:local.areas,
+        desc:{si:String(r.description_si||local.desc.si),en:String(r.description_en||local.desc.en),ta:String(r.description_ta||local.desc.ta)},
+        suggest:(Array.isArray(r.suggested_skills)?r.suggested_skills:[]).map(String).slice(0,4),
+        confirm:(Array.isArray(r.needs_confirming)?r.needs_confirming:[]).map(String).slice(0,3),
+      };
+      if(!p.skills.length) p.skills=local.skills;
+    }
+  }catch(e){ /* fall through to local */ }
+  if(!p){ p=local; notes.push('aiOff'); }
+  p.usedAI=usedAI; p.notes=notes; p.yearsSrc = p.years!=null ? (text.match(new RegExp('[^.।\\n]*'+p.years+'[^.।\\n]*'))||[''])[0].trim() : '';
+  return p;
+}
+function localProfile(text, baseTown){
+  const cats=detectCats(text); const years=extractYears(text);
+  const areas=detectTowns(text).filter(id=>id!==baseTown);
+  // expand district mentions (e.g. "Gampaha") already map to town; keep as is
+  const c=cats[0]?CAT[cats[0]]:null;
+  const areaNames = l => [baseTown,...areas].filter(Boolean).map(id=>TOWN[id]?.[l]).filter(Boolean).join(', ');
+  return {
+    cats, years, areas,
+    skills: cats.map(id=>CAT[id].en),
+    desc:{
+      si: c ? `${c.si} ලෙස සේවා සපයමි.${years?` වසර ${years}ක පළපුරුද්දක් ඇත.`:''}${areaNames('si')?` ${areaNames('si')} ප්‍රදේශවල වැඩ භාර ගනිමි.`:''}` : text,
+      en: c ? `I work as a ${c.en.toLowerCase()}.${years?` ${years} years of experience.`:''}${areaNames('en')?` I take work in ${areaNames('en')}.`:''}` : text,
+      ta: c ? `நான் ${c.ta} ஆக பணியாற்றுகிறேன்.${years?` ${years} ஆண்டு அனுபவம்.`:''}${areaNames('ta')?` ${areaNames('ta')} பகுதிகளில் வேலை செய்கிறேன்.`:''}` : text,
+    },
+    suggest:[], confirm:[],
+  };
+}
+async function aiSearch(q){
+  const prompt = `A customer on Minissu.lk (a Sri Lankan marketplace for skilled workers) typed this search, possibly in Sinhala, Tamil, English, Singlish, informal or misspelled:
+"""${q.slice(0,500)}"""
+Return ONLY JSON: {"categories":[ids],"town":town id or null,"summary_en":"one short sentence of what they need"}
+Category ids: ${CAT_LIST}.
+Town ids: ${TOWN_LIST}.
+If unsure about the service, return an empty categories list. Do not guess a town that is not mentioned.`;
+  const r = await aiJSON(prompt);
+  return { cats:(r?.categories||[]).filter(id=>CAT[id]), town: TOWN[r?.town]?r.town:null, summary:String(r?.summary_en||'') };
+}
+
+// ---------- Voice ----------
+function voiceInput(onText){
+  const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+  if(!SR){ toast(t('noVoice')); return; }
+  try{
+    const rec = new SR(); rec.lang = ({si:'si-LK',ta:'ta-LK',en:'en-LK'})[S.lang]; rec.interimResults=false; rec.maxAlternatives=1;
+    rec.onresult = e => { const s=e.results?.[0]?.[0]?.transcript; if(s) onText(s); };
+    rec.onerror = () => toast(t('noVoice'));
+    rec.start(); toast(t('listening'));
+  }catch(e){ toast(t('noVoice')); }
+}
+function speak(text){
+  try{
+    if(!('speechSynthesis' in window)) throw 0;
+    const u=new SpeechSynthesisUtterance(text); u.lang=({si:'si-LK',ta:'ta-LK',en:'en-GB'})[S.lang];
+    const vs=speechSynthesis.getVoices(); if(vs.length && !vs.some(v=>v.lang && v.lang.toLowerCase().startsWith(S.lang))) throw 0;
+    speechSynthesis.cancel(); speechSynthesis.speak(u);
+  }catch(e){ toast(t('noVoice')); }
+}
+
+// ---------- UI helpers ----------
+let toastTimer;
+function toast(msg){ const el=$('#toast'); el.innerHTML=`<div class="toast" role="status">${esc(msg)}</div>`; clearTimeout(toastTimer); toastTimer=setTimeout(()=>el.innerHTML='',3800); }
+const micSvg = c => `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="${c||'currentColor'}" stroke-width="2" stroke-linecap="round"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg>`;
+const searchSvg = `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>`;
+function townOptions(sel, anyLabel){
+  const groups={}; for(const x of TOWNS){ (groups[x.district]=groups[x.district]||[]).push(x); }
+  let h = `<option value="">${esc(anyLabel||t('pickTown'))}</option>`;
+  for(const [d,arr] of Object.entries(groups)){ h+=`<optgroup label="${esc(d)}">`+arr.map(x=>`<option value="${x.id}" ${x.id===sel?'selected':''}>${esc(x[S.lang])}</option>`).join('')+`</optgroup>`; }
+  return h;
+}
+function avatar(w,lg){ const ini=(w.name||'?').trim().charAt(0).toUpperCase(); return `<div class="av${lg?' lg':''}">${w.selfie?`<img src="${esc(w.selfie)}" alt="">`:esc(ini)}</div>`; }
+function availLine(w){
+  if(w.avail==='now') return `<span class="dot on"></span>${esc(t('availNow'))}`;
+  if(w.avail==='date') return `<span class="dot date"></span>${esc(t('availDate'))}: ${esc(w.availDate||'')}`;
+  return `<span class="dot off"></span>${esc(t('availNo'))}`;
+}
+function badgesHtml(w){
+  let b='';
+  if(w.demo) b+=`<span class="badge demo">${esc(t('demo'))}</span>`;
+  b+= w.selfie?`<span class="badge ok">📷 ${esc(S.lang==='en'?'Selfie':S.lang==='ta'?'செல்ஃபி':'සෙල්ෆි')}</span>`:'';
+  b+= `<span class="badge">📱 ${esc(S.lang==='en'?'Not verified':S.lang==='ta'?'சரிபார்க்கப்படவில்லை':'තහවුරු කර නැත')}</span>`;
+  return b;
+}
+
+// ---------- Views ----------
+function render(){
+  document.documentElement.lang = S.lang;
+  document.querySelectorAll('.langs button').forEach(b=>b.classList.toggle('on',b.dataset.lang===S.lang));
+  const v = S.view;
+  $('#view').innerHTML = v==='register'?vRegister(): v==='find'?vFind(): v==='me'?vMe(): vHome();
+  $('#foot').innerHTML = `<div>${esc(t('foot1'))}</div><div>${esc(t('foot2'))}</div><div style="margin-top:6px;font-weight:600;color:var(--g)">${esc(t('motto'))}</div>`;
+  afterRender();
+}
+function vHome(){
+  const meCard = S.me ? `<div class="card"><div class="toggle"><div><div class="mut small">${esc(t('myProfile'))}</div><b>${esc(S.me.name)}</b> · <span class="occ">${esc(cn(S.me.cats[0]))}</span><div class="small">${S.me.avail==='now'?esc(t('availSwitchOn')):esc(t('availSwitchOff'))}</div></div><button class="sw ${S.me.avail==='now'?'on':''}" data-act="toggleAvail" aria-label="availability"></button></div><button class="btn t" data-act="go" data-v="me">${esc(t('myProfile'))} →</button></div>` : '';
+  return `
+  <h1>${esc(t('hello'))}</h1>
+  <p class="mut" style="font-size:20px">${esc(t('ask'))}</p>
+  <form class="search" data-form="homeSearch">
+    <input id="homeQ" placeholder="${esc(t('searchPh'))}" autocomplete="off" aria-label="${esc(t('searchPh'))}">
+    <button type="button" class="iconbtn l" data-act="micHome" aria-label="${esc(t('speak'))}">${micSvg()}</button>
+    <button type="submit" class="iconbtn g" aria-label="search">${searchSvg}</button>
+  </form>
+  ${meCard}
+  <button class="big work" data-act="startReg"><span class="ic">🛠️</span><span><b>${esc(t('findWork'))}</b><small>${esc(t('findWorkSub'))}</small></span></button>
+  <button class="big find" data-act="go" data-v="find"><span class="ic">🔍</span><span><b>${esc(t('findWorker'))}</b><small>${esc(t('findWorkerSub'))}</small></span></button>
+  <button class="big speak" data-act="micHome"><span class="ic">${micSvg('#fff')}</span><span><b>${esc(t('speak'))}</b><small>${esc(t('speakSub'))}</small></span></button>
+  <h3>${esc(t('popular'))}</h3>
+  <div class="cats">${['painter','mason','electrician','plumber','ac','carpenter','welder','mechanic','cleaner'].map(id=>`<button class="cat" data-act="catSearch" data-c="${id}"><span class="e">${CAT[id].e}</span>${esc(cn(id))}</button>`).join('')}</div>
+  <p class="tag">${esc(t('tagline'))}</p>`;
+}
+
+// ----- Register wizard -----
+const REG_STEPS = 6;
+function newReg(){ return {name:'',phone:'',town:'',areas:[],selfie:null,text:'',p:null,descTab:S.lang,avail:'now',availDate:'',showPhone:true,consent:false,suggestOn:[],busy:false,err:''}; }
+function stepsBar(){ return `<div class="steps">${Array.from({length:REG_STEPS},(_,i)=>`<i class="${i<=S.regStep?'on':''}"></i>`).join('')}</div><div class="mut small">${esc(t('step'))} ${S.regStep+1} / ${REG_STEPS}</div>`; }
+function validPhone(p){ const d=String(p).replace(/[\s-]/g,''); return /^(?:0|\+94|94)7\d{8}$/.test(d); }
+function vRegister(){
+  const r=S.reg, st=S.regStep;
+  let body='';
+  if(st===0){
+    body=`<h2>${esc(t('regTitle'))}</h2>
+    <label class="f" for="rName">${esc(t('name'))}</label><input class="inp" id="rName" value="${esc(r.name)}" placeholder="${esc(t('namePh'))}" autocomplete="name">
+    <label class="f" for="rPhone">${esc(t('phone'))}</label><input class="inp" id="rPhone" value="${esc(r.phone)}" placeholder="${esc(t('phonePh'))}" inputmode="tel" autocomplete="tel">
+    ${r.err?`<div class="note red">${esc(r.err)}</div>`:''}
+    <div class="note">${esc(t('otpNote'))}</div>`;
+  } else if(st===1){
+    const near = r.town ? TOWNS.filter(x=>x.id!==r.town && km(TOWN[r.town],x)<=30).sort((a,b)=>km(TOWN[r.town],a)-km(TOWN[r.town],b)) : [];
+    body=`<h2>${esc(t('where'))}</h2>
+    <label class="f" for="rTown">${esc(t('town'))}</label>
+    <select class="inp" id="rTown">${townOptions(r.town)}</select>
+    <button class="btn t" data-act="gps">📍 ${esc(t('useGps'))}</button>
+    ${r.town?`<label class="f">${esc(t('areas'))}</label><div class="hint" style="margin-bottom:8px">${esc(t('areasHint'))}</div>
+    <div class="chips">${near.map(x=>`<button class="chip ${r.areas.includes(x.id)?'on':''}" data-act="toggleArea" data-id="${x.id}">${esc(x[S.lang])} <span class="mut small">${Math.round(km(TOWN[r.town],x))} ${esc(t('km'))}</span></button>`).join('')}</div>`:''}`;
+  } else if(st===2){
+    body=`<h2>${esc(t('selfieT'))}</h2>
+    <div class="selfie">${r.selfie?`<img src="${r.selfie}" alt="selfie">`:'<span style="font-size:52px">🙂</span>'}</div>
+    <p class="hint">${esc(t('selfieHint'))}</p>
+    <label class="btn s" style="margin-top:8px">📷 ${esc(r.selfie?t('retake'):t('takeSelfie'))}<input type="file" accept="image/*" capture="user" id="rSelfie" class="sr"></label>`;
+  } else if(st===3){
+    body=`<h2>${esc(t('describe'))}</h2>
+    <p class="hint">${esc(t('describeHint'))}</p>
+    <div style="position:relative"><textarea class="inp" id="rText" placeholder="${esc(t('describePh'))}">${esc(r.text)}</textarea>
+    <button class="iconbtn g" data-act="micDesc" style="position:absolute;right:10px;bottom:12px" aria-label="${esc(t('speak'))}">${micSvg()}</button></div>
+    <button class="btn t" data-act="example">✍️ ${esc(t('example'))}</button>
+    ${r.err?`<div class="note red">${esc(r.err)}</div>`:''}`;
+  } else if(st===4){
+    const p=r.p;
+    const notes = p.notes.map(n=>`<div class="note">${esc(t(n))}</div>`).join('');
+    body=`<h2>${esc(t('review'))}</h2><p class="hint">${esc(t('reviewHint'))}</p>${notes}
+    ${p.confirm?.length?`<div class="note">${p.confirm.map(esc).join('<br>')}</div>`:''}
+    <label class="f">${esc(t('occupation'))}</label>
+    <div class="chips">${CATS.map(c=>`<button class="chip ${p.cats.includes(c.id)?'on':''}" data-act="toggleCat" data-id="${c.id}">${c.e} ${esc(c[S.lang])}</button>`).join('')}</div>
+    <label class="f" for="rSkills">${esc(t('skills'))}</label><input class="inp" id="rSkills" value="${esc(p.skills.join(', '))}"><div class="hint">${esc(t('skillsHint'))}</div>
+    ${p.suggest?.length?`<label class="f">${esc(t('suggest'))}</label><div class="hint" style="margin-bottom:6px">${esc(t('suggestHint'))}</div><div class="chips">${p.suggest.map((s,i)=>`<button class="chip ${r.suggestOn.includes(i)?'on':''}" data-act="toggleSug" data-i="${i}">+ ${esc(s)}</button>`).join('')}</div>`:''}
+    <label class="f" for="rYears">${esc(t('years'))}</label><input class="inp" id="rYears" type="number" min="0" max="60" value="${p.years??''}" style="max-width:140px">
+    <div class="hint">${p.years!=null&&p.yearsSrc?`${esc(t('yearsFrom'))}: “${esc(p.yearsSrc)}”`:esc(t('yearsNone'))}</div>
+    <label class="f">${esc(t('desc'))}</label>
+    <div class="tabs">${['si','ta','en'].map(l=>`<button class="${r.descTab===l?'on':''}" data-act="descTab" data-l="${l}">${l==='si'?'සිංහල':l==='ta'?'தமிழ்':'English'}</button>`).join('')}</div>
+    <textarea class="inp" id="rDesc">${esc(p.desc[r.descTab])}</textarea>
+    <button class="btn t" data-act="readAloud">🔊 ${esc(t('readAloud'))}</button>
+    <label class="f">${esc(t('orig'))}</label><div class="orig">${esc(r.text)}</div>`;
+  } else if(st===5){
+    body=`<h2>${esc(t('avail'))}</h2>
+    <div class="chips" style="flex-direction:column;align-items:stretch">
+      ${[['now','availNow','🟢'],['date','availDate','🟡'],['off','availNo','🔴']].map(([v,k,e])=>`<button class="chip ${r.avail===v?'on':''}" data-act="setAvail" data-v="${v}" style="padding:14px 16px;font-size:18px;text-align:left">${e} ${esc(t(k))}</button>`).join('')}
+    </div>
+    ${r.avail==='date'?`<label class="f" for="rDate">${esc(t('fromDate'))}</label><input class="inp" type="date" id="rDate" value="${esc(r.availDate)}" style="max-width:220px">`:''}
+    <div class="card" style="margin-top:18px">
+      <label class="row" style="align-items:flex-start;gap:12px;cursor:pointer"><input type="checkbox" id="rShow" ${r.showPhone?'checked':''} style="width:24px;height:24px;margin-top:3px"><span>${esc(t('showPhone'))}</span></label>
+      <label class="row" style="align-items:flex-start;gap:12px;cursor:pointer;margin-top:12px"><input type="checkbox" id="rConsent" ${r.consent?'checked':''} style="width:24px;height:24px;margin-top:3px"><span>${esc(t('consent'))}</span></label>
+    </div>
+    ${r.err?`<div class="note red">${esc(r.err)}</div>`:''}`;
+  }
+  const nextLabel = st===3 ? (r.busy?`<span class="spin"></span> ${esc(t('making'))}`:`✨ ${esc(t('makeProfile'))}`) : st===5 ? (r.busy?`<span class="spin"></span> ${esc(t('publishing'))}`:esc(t('publish'))) : esc(t('next'))+' →';
+  return `<button class="back" data-act="regBack">← ${esc(t('back'))}</button>${stepsBar()}
+  <div>${body}</div>
+  <div class="row" style="margin-top:20px">
+    <button class="btn p w" data-act="regNext" ${r.busy?'disabled':''}>${nextLabel}</button>
+    ${st===2&&!r.selfie?`<button class="btn t w" data-act="regSkip">${esc(t('skip'))}</button>`:''}
+  </div>`;
+}
+function readRegInputs(){
+  const r=S.reg; const g=id=>document.getElementById(id);
+  if(g('rName')) r.name=g('rName').value.trim();
+  if(g('rPhone')) r.phone=g('rPhone').value.trim();
+  if(g('rText')) r.text=g('rText').value;
+  if(r.p){
+    if(g('rSkills')) r.p.skills=g('rSkills').value.split(/[,،]/).map(s=>s.trim()).filter(Boolean);
+    if(g('rYears')){ const v=g('rYears').value; r.p.years = v===''?null:Math.max(0,Math.min(60,Math.round(+v))); }
+    if(g('rDesc')) r.p.desc[r.descTab]=g('rDesc').value;
+  }
+  if(g('rDate')) r.availDate=g('rDate').value;
+  if(g('rShow')) r.showPhone=g('rShow').checked;
+  if(g('rConsent')) r.consent=g('rConsent').checked;
+}
+async function regNext(){
+  readRegInputs(); const r=S.reg; r.err='';
+  if(S.regStep===0){
+    if(!r.name){ r.err=t('name')+' ?'; return render(); }
+    if(!validPhone(r.phone)){ r.err=t('phoneBad'); return render(); }
+  }
+  if(S.regStep===1 && !r.town){ toast(t('pickTown')); return; }
+  if(S.regStep===3){
+    if(r.text.trim().length<4){ r.err=t('describeHint'); return render(); }
+    r.busy=true; render();
+    r.p = await buildProfile(r.text, r.town);
+    r.suggestOn=[]; r.descTab=S.lang; r.busy=false;
+    // fold AI-detected service areas into selection
+    for(const a of r.p.areas) if(!r.areas.includes(a)) r.areas.push(a);
+  }
+  if(S.regStep===4 && !r.p.cats.length){ toast(t('occupation')+' ?'); return; }
+  if(S.regStep===5){
+    if(!r.consent){ r.err=t('consent'); return render(); }
+    if(r.avail==='date' && !r.availDate){ toast(t('fromDate')+' ?'); return; }
+    return publish();
+  }
+  S.regStep=Math.min(REG_STEPS-1,S.regStep+1); render(); window.scrollTo(0,0);
+}
+async function publish(){
+  const r=S.reg; r.busy=true; render();
+  const skills=[...r.p.skills, ...r.suggestOn.map(i=>r.p.suggest[i])].filter((v,i,a)=>v&&a.indexOf(v)===i);
+  const doc = {
+    name:r.name.slice(0,60), phone:r.phone.replace(/[\s-]/g,''), showPhone:!!r.showPhone,
+    cats:r.p.cats.slice(0,4), skills:skills.slice(0,10), years:r.p.years, desc:r.p.desc, original:r.text.slice(0,1500),
+    town:r.town, areas:r.areas.slice(0,12), avail:r.avail, availDate:r.avail==='date'?r.availDate:'',
+    selfie:r.selfie||null, verif:{phone:false,selfie:false}, aiUsed:!!r.p.usedAI, updated:new Date().toISOString(),
+  };
+  let shared=false;
+  if(S.db && S.uid){
+    try{ await S.db.doc('workers/'+S.uid).set(doc); shared=true; }catch(e){ shared=false; }
+  }
+  S.me = {...doc, id:S.uid||'local', mine:true};
+  if(!shared){ try{ localStorage.setItem('mn_me',JSON.stringify(S.me)); }catch(e){} }
+  r.busy=false; S.view='me'; render(); window.scrollTo(0,0);
+  toast(shared?t('published'):t('saveLocal'));
+}
+
+// ----- Me -----
+function vMe(){
+  const w=S.me; if(!w) return vHome();
+  return `<button class="back" data-act="home">← ${esc(t('back'))}</button>
+  <h2>${esc(t('myProfile'))}</h2>
+  <div class="card"><div class="toggle"><b style="font-size:20px">${w.avail==='now'?esc(t('availSwitchOn')):esc(t('availSwitchOff'))}</b><button class="sw ${w.avail==='now'?'on':''}" data-act="toggleAvail" aria-label="availability"></button></div></div>
+  ${profileBody(w)}
+  <div class="row" style="margin-top:14px"><button class="btn s grow" data-act="editMe">✏️ ${esc(t('edit'))}</button><button class="btn danger grow" data-act="delMe">${esc(t('del'))}</button></div>
+  ${S.uid?'':`<div class="note">${esc(t('saveLocal'))}</div>`}`;
+}
+async function toggleAvail(){
+  if(!S.me) return; const nv = S.me.avail==='now'?'off':'now';
+  S.me.avail=nv; S.me.availDate=''; render();
+  if(S.db && S.uid && S.me.id===S.uid){ try{ await S.db.doc('workers/'+S.uid).update({avail:nv,availDate:'',updated:new Date().toISOString()}); }catch(e){ toast('⚠️ '+(e?.message||'')); } }
+  else { try{ localStorage.setItem('mn_me',JSON.stringify(S.me)); }catch(e){} }
+}
+function editMe(){
+  const w=S.me; S.reg={...newReg(),name:w.name,phone:w.phone,town:w.town,areas:[...(w.areas||[])],selfie:w.selfie,text:w.original||'',
+    p:{cats:[...w.cats],skills:[...w.skills],years:w.years,areas:[],desc:{...w.desc},suggest:[],confirm:[],notes:[],usedAI:w.aiUsed,yearsSrc:''},
+    avail:w.avail,availDate:w.availDate||'',showPhone:w.showPhone,consent:true};
+  S.regStep=4; S.view='register'; render(); window.scrollTo(0,0);
+}
+function delMe(){
+  openModal(`<h2>${esc(t('delSure'))}</h2><div class="row" style="margin-top:16px"><button class="btn danger grow" data-act="delYes">${esc(t('yesDel'))}</button><button class="btn s grow" data-act="closeModal">${esc(t('cancel'))}</button></div>`);
+}
+async function delYes(){
+  closeModal();
+  if(S.db && S.uid){ try{ await S.db.doc('workers/'+S.uid).delete(); }catch(e){} }
+  try{ localStorage.removeItem('mn_me'); }catch(e){}
+  S.me=null; S.view='home'; render(); toast(t('deleted'));
+}
+
+// ----- Find -----
+function vFind(){
+  const q=S.q;
+  let resHtml='';
+  if(q.busy) resHtml=`<div class="card row"><span class="spin d"></span> ${esc(t('searching'))}</div>`;
+  else if(q.ran){
+    if(!q.cats.length && q.text) resHtml+=`<div class="note">${esc(t('noCat'))}</div>`;
+    const {inside,outside}=rankWorkers(q.cats,q.town,q.radius,{onlyAvail:q.onlyAvail,onlyPhoto:q.onlyPhoto});
+    if(q.aiNote) resHtml+=`<div class="note g">🤖 ${esc(t('understood'))}: ${esc(q.aiNote)}</div>`;
+    resHtml+=`<h3>${esc(t('results'))} (${inside.length})</h3>`;
+    resHtml+= inside.length? inside.map(resultCard).join('') : `<div class="card mut">${esc(t('none'))}</div>`;
+    if(q.town && outside.length && q.cats.length){ resHtml+=`<h3>📍 ${esc(t('nearbyT'))}</h3>`+outside.map(resultCard).join(''); }
+  } else resHtml=`<p class="mut">${esc(t('typeSomething'))}</p><div class="cats">${CATS.slice(0,12).map(c=>`<button class="cat" data-act="catSearch" data-c="${c.id}"><span class="e">${c.e}</span>${esc(c[S.lang])}</button>`).join('')}</div>`;
+  const catChips = q.cats.length ? `<div class="chips" style="margin:-4px 0 8px">${q.cats.map(id=>`<span class="chip on sm">${CAT[id].e} ${esc(cn(id))}</span>`).join('')}</div>` : '';
+  return `<button class="back" data-act="home">← ${esc(t('back'))}</button>
+  <h2>${esc(t('findTitle'))}</h2>
+  <form class="search" data-form="findSearch" style="margin-top:4px">
+    <input id="findQ" value="${esc(q.text)}" placeholder="${esc(t('searchPh'))}" autocomplete="off" aria-label="${esc(t('searchPh'))}">
+    <button type="button" class="iconbtn l" data-act="micFind" aria-label="${esc(t('speak'))}">${micSvg()}</button>
+    <button type="submit" class="iconbtn g" aria-label="search">${searchSvg}</button>
+  </form>
+  ${catChips}
+  <div class="row">
+    <select class="inp grow" id="fTown" aria-label="${esc(t('whereNeed'))}" style="min-width:180px">${townOptions(q.town,'📍 '+t('anyTown'))}</select>
+  </div>
+  ${q.town?`<div class="row" style="margin-top:10px"><span class="mut small">${esc(t('radius'))}:</span><div class="chips">${[5,10,25,50].map(r=>`<button class="chip ${q.radius===r?'on':''}" data-act="radius" data-r="${r}">${r} ${esc(t('km'))}</button>`).join('')}</div></div>`:''}
+  <div class="chips" style="margin-top:10px">
+    <button class="chip ${q.onlyAvail?'on':''}" data-act="fAvail">🟢 ${esc(t('onlyAvail'))}</button>
+    <button class="chip ${q.onlyPhoto?'on':''}" data-act="fPhoto">📷 ${esc(t('onlyPhoto'))}</button>
+  </div>
+  ${S.sharedState==='slow'?`<div class="note small">⏳ ${esc(S.lang==='en'?'Registered profiles are still loading — results may be incomplete.':S.lang==='ta'?'பதிவுசெய்யப்பட்ட சுயவிவரங்கள் இன்னும் ஏற்றப்படுகின்றன.':'ලියාපදිංචි පැතිකඩ තවම පූරණය වෙමින් පවතී — ප්‍රතිඵල අසම්පූර්ණ විය හැක.')}</div>`:''}
+  ${resHtml}`;
+}
+function resultCard(r){
+  const w=r.w;
+  return `<div class="card wcard" data-act="openW" data-id="${esc(w.id)}" role="button" tabindex="0">
+    ${avatar(w)}
+    <div style="flex:1;min-width:0">
+      <div class="wname">${esc(w.name)}</div>
+      <div class="occ">${w.cats.map(c=>esc(cn(c))).join(' · ')}</div>
+      <div class="meta">📍 ${esc(tn(w.town))}${r.dist!=null?` · ${r.dist<1?'<1':Math.round(r.dist)} ${esc(t('km'))} ${esc(t('away'))}`:''}${w.years?` · ${w.years} ${esc(t('yrs'))}`:''}</div>
+      <div class="meta">${availLine(w)}</div>
+      <div class="badges">${badgesHtml(w)}</div>
+      ${r.why.length?`<div class="why">✓ ${r.why.map(k=>esc(t(k))).join(' · ')}</div>`:''}
+    </div>
+    <div class="score">${r.score}<small>${esc(t('match'))}</small></div>
+  </div>`;
+}
+async function runSearch(text){
+  const q=S.q; q.text=(text??q.text).trim(); q.aiNote=''; q.ran=true;
+  let cats=detectCats(q.text); const towns=detectTowns(q.text);
+  if(towns.length) q.town=towns[0];
+  if(!cats.length && q.text && S.sample){
+    q.busy=true; render();
+    try{ const a=await aiSearch(q.text); cats=a.cats; if(a.town && !towns.length) q.town=a.town; q.aiNote=a.summary; }catch(e){}
+    q.busy=false;
+  }
+  q.cats=cats; S.view='find'; render();
+}
+
+// ----- Worker profile modal -----
+function profileBody(w){
+  const desc = w.desc?.[S.lang] || w.desc?.en || w.desc?.si || '';
+  const phone = (!w.demo && w.showPhone && w.phone) ? w.phone : null;
+  const intl = phone ? '94'+phone.replace(/^(\+94|94|0)/,'') : '';
+  return `<div class="card">
+    <div class="row" style="align-items:flex-start;gap:16px">${avatar(w,true)}
+      <div style="flex:1;min-width:0"><div class="wname" style="font-size:22px">${esc(w.name)}</div>
+      <div class="occ">${w.cats.map(c=>CAT[c]?CAT[c].e+' '+esc(cn(c)):'').join(' · ')}</div>
+      <div class="meta">📍 ${esc(tn(w.town))} (${esc(t('approx'))})</div>
+      <div class="meta">${availLine(w)}</div>
+      ${w.years?`<div class="meta">🧰 ${w.years} ${esc(t('yrs'))}</div>`:''}
+      <div class="badges">${badgesHtml(w)}</div></div></div>
+    <p style="margin-top:14px">${esc(desc)}</p>
+    ${w.skills?.length?`<h3>${esc(t('skills'))}</h3><div class="chips">${w.skills.map(s=>`<span class="chip sm">${esc(s)}</span>`).join('')}</div>`:''}
+    ${w.areas?.length?`<h3>${esc(t('serviceAreas'))}</h3><div class="chips">${w.areas.map(a=>`<span class="chip sm">${esc(tn(a))}</span>`).join('')}</div>`:''}
+    <h3>${esc(t('verif'))}</h3>
+    <div class="small" style="line-height:1.8">⚪ ${esc(t('v_phone_no'))}<br>${w.selfie?'🟡 '+esc(t('v_selfie')):'⚪ '+esc(t('v_noselfie'))}<br>⚪ ${esc(t('v_id'))}<br>⚪ ${esc(t('v_qual'))}<br>⚪ ${esc(t('reviews'))}</div>
+    ${w.demo?`<div class="note">${esc(t('demoNoContact'))}</div>`:''}
+    ${phone?`<div class="row" style="margin-top:14px"><a class="btn p grow" href="tel:${esc(phone)}" style="text-decoration:none">📞 ${esc(t('call'))}</a><a class="btn wa grow" href="https://wa.me/${esc(intl)}" target="_blank" rel="noopener" style="text-decoration:none">💬 ${esc(t('whatsapp'))}</a></div><div class="hint" style="text-align:center">${esc(t('number'))}: ${esc(phone)}</div>`:''}
+  </div>`;
+}
+function openW(id){
+  const w=allWorkers().find(x=>x.id===id); if(!w) return;
+  openModal(`<div class="row" style="justify-content:flex-end"><button class="btn t" data-act="closeModal">✕ ${esc(t('close'))}</button></div>${profileBody(w)}`);
+}
+function openModal(html){ $('#modal').innerHTML=`<div class="modal" data-act="modalBg"><div class="sheet" role="dialog" aria-modal="true">${html}</div></div>`; }
+function closeModal(){ $('#modal').innerHTML=''; }
+
+// ---------- Image resize ----------
+function resizeImage(file, max=240){
+  return new Promise((res,rej)=>{
+    const fr=new FileReader(); fr.onerror=rej;
+    fr.onload=()=>{ const img=new Image(); img.onerror=rej; img.onload=()=>{
+      const s=Math.min(img.width,img.height); const c=document.createElement('canvas'); c.width=c.height=max;
+      c.getContext('2d').drawImage(img,(img.width-s)/2,(img.height-s)/2,s,s,0,0,max,max);
+      res(c.toDataURL('image/jpeg',0.8)); }; img.src=fr.result; };
+    fr.readAsDataURL(file);
+  });
+}
+
+// ---------- Events ----------
+function afterRender(){
+  const ft=$('#fTown'); if(ft) ft.onchange=()=>{ S.q.town=ft.value; if(S.q.ran) render(); else render(); };
+  const rt=$('#rTown'); if(rt) rt.onchange=()=>{ readRegInputs(); S.reg.town=rt.value; S.reg.areas=[]; render(); };
+  const sf=$('#rSelfie'); if(sf) sf.onchange=async()=>{ const f=sf.files?.[0]; if(!f) return; try{ S.reg.selfie=await resizeImage(f); render(); }catch(e){ toast('⚠️'); } };
+}
+document.addEventListener('submit',e=>{
+  const f=e.target.closest('[data-form]'); if(!f) return; e.preventDefault();
+  if(f.dataset.form==='homeSearch'){ const v=$('#homeQ').value; S.q={...S.q,text:v,town:'',cats:[],ran:false}; S.view='find'; runSearch(v); }
+  if(f.dataset.form==='findSearch'){ runSearch($('#findQ').value); }
+});
+document.addEventListener('keydown',e=>{ if(e.key==='Enter'){ const c=e.target.closest('[data-act="openW"]'); if(c) openW(c.dataset.id); } if(e.key==='Escape') closeModal(); });
+document.addEventListener('click',e=>{
+  const lb=e.target.closest('[data-lang]'); if(lb){ S.lang=lb.dataset.lang; try{localStorage.setItem('mn_lang',S.lang);}catch(_){}; if(S.reg) readRegInputs(); render(); return; }
+  const el=e.target.closest('[data-act]'); if(!el) return;
+  const a=el.dataset.act;
+  if(a==='modalBg'){ if(e.target===el) closeModal(); return; }
+  switch(a){
+    case 'home': S.view='home'; location.hash=''; render(); break;
+    case 'go': S.view=el.dataset.v; render(); window.scrollTo(0,0); break;
+    case 'startReg': if(S.me){ S.view='me'; render(); break; } S.reg=newReg(); S.regStep=0; S.view='register'; render(); window.scrollTo(0,0); break;
+    case 'regBack': readRegInputs(); if(S.regStep===0){ S.view='home'; } else S.regStep--; render(); break;
+    case 'regNext': regNext(); break;
+    case 'regSkip': S.regStep++; render(); break;
+    case 'toggleArea': { readRegInputs(); const id=el.dataset.id, ar=S.reg.areas; const i=ar.indexOf(id); i>=0?ar.splice(i,1):ar.push(id); render(); break; }
+    case 'gps': {
+      try{ navigator.geolocation.getCurrentPosition(p=>{ const n=nearestTown(p.coords.latitude,p.coords.longitude); readRegInputs(); S.reg.town=n.id; render(); }, ()=>toast(t('gpsFail')), {timeout:8000}); }
+      catch(_){ toast(t('gpsFail')); } break; }
+    case 'example': S.reg.text=({si:'මම ගෙවල් පින්තාරු කරනවා. අවුරුදු 8ක පළපුරුද්ද තියෙනවා. කොළඹ සහ ගම්පහ ප්‍රදේශවල වැඩ කරනවා.',ta:'நான் வீடுகளுக்கு வர்ணம் பூசுகிறேன். 8 ஆண்டு அனுபவம். கொழும்பு மற்றும் கம்பஹா பகுதிகளில் வேலை செய்கிறேன்.',en:'I paint houses. 8 years experience. I work in Colombo and Gampaha areas.'})[S.lang]; render(); break;
+    case 'micDesc': readRegInputs(); voiceInput(s=>{ S.reg.text=(S.reg.text?S.reg.text+' ':'')+s; render(); }); break;
+    case 'micHome': voiceInput(s=>{ S.q={...S.q,text:s,town:'',cats:[],ran:false}; runSearch(s); }); break;
+    case 'micFind': voiceInput(s=>runSearch(s)); break;
+    case 'toggleCat': { readRegInputs(); const id=el.dataset.id, c=S.reg.p.cats; const i=c.indexOf(id); i>=0?c.splice(i,1):c.push(id); render(); break; }
+    case 'toggleSug': { readRegInputs(); const i=+el.dataset.i, s=S.reg.suggestOn; const j=s.indexOf(i); j>=0?s.splice(j,1):s.push(i); render(); break; }
+    case 'descTab': readRegInputs(); S.reg.descTab=el.dataset.l; render(); break;
+    case 'readAloud': readRegInputs(); speak(S.reg.p.desc[S.reg.descTab]); break;
+    case 'setAvail': readRegInputs(); S.reg.avail=el.dataset.v; render(); break;
+    case 'toggleAvail': toggleAvail(); break;
+    case 'editMe': editMe(); break;
+    case 'delMe': delMe(); break;
+    case 'delYes': delYes(); break;
+    case 'closeModal': closeModal(); break;
+    case 'catSearch': S.q={...S.q,text:'',cats:[el.dataset.c],ran:true,aiNote:''}; S.view='find'; render(); window.scrollTo(0,0); break;
+    case 'radius': S.q.radius=+el.dataset.r; render(); break;
+    case 'fAvail': S.q.onlyAvail=!S.q.onlyAvail; render(); break;
+    case 'fPhoto': S.q.onlyPhoto=!S.q.onlyPhoto; render(); break;
+    case 'openW': openW(el.dataset.id); break;
+  }
+});
+
+// ---------- Platform capabilities (light up when available) ----------
+function docToWorker(d){
+  const x=d.data(); if(!x) return null;
+  const cats=(Array.isArray(x.cats)?x.cats:[]).filter(c=>CAT[c]); if(!cats.length || !TOWN[x.town]) return null;
+  const safeImg = typeof x.selfie==='string' && /^data:image\/(jpeg|png|webp);base64,[A-Za-z0-9+\/=]+$/.test(x.selfie) ? x.selfie : null;
+  return { id:d.id, name:String(x.name||'').slice(0,60), cats, skills:(Array.isArray(x.skills)?x.skills:[]).map(String).slice(0,10),
+    years: Number.isFinite(x.years)?x.years:null, desc: (x.desc&&typeof x.desc==='object')?{si:String(x.desc.si||''),ta:String(x.desc.ta||''),en:String(x.desc.en||'')}:{si:'',ta:'',en:''},
+    town:x.town, areas:(Array.isArray(x.areas)?x.areas:[]).filter(a=>TOWN[a]), avail:['now','date','off'].includes(x.avail)?x.avail:'off', availDate:String(x.availDate||''),
+    phone: x.showPhone && validPhone(x.phone) ? String(x.phone) : null, showPhone:!!x.showPhone, selfie:safeImg, verif:{phone:false,selfie:false},
+    original:String(x.original||''), aiUsed:!!x.aiUsed };
+}
+async function initPlatform(){
+  if(!window.claude || typeof window.claude.use!=='function'){ S.sharedState='off'; loadLocalMe(); render(); return; }
+  claude.use('sample').then(s=>{ S.sample=s||null; }).catch(()=>{});
+  let user=null; try{ user=await claude.use('user'); }catch(e){}
+  S.user=user;
+  try{ S.uid = user ? await user.id() : null; }catch(e){ S.uid=null; }
+  let db=null; try{ db=await claude.use('db'); }catch(e){}
+  S.db=db;
+  if(!db){ S.sharedState='off'; loadLocalMe(); render(); return; }
+  const timer=setTimeout(()=>{ if(S.sharedState==='loading'){ S.sharedState='slow'; if(S.view==='find') render(); } },10000);
+  db.collection('workers').onSnapshot(snap=>{
+    const list=[]; for(const d of snap.docs){ const w=docToWorker(d); if(w) list.push(w); }
+    S.shared=list;
+    if(!snap.metadata.fromCache){ clearTimeout(timer); S.sharedState='ok'; }
+    if(S.uid){ const mine=list.find(w=>w.id===S.uid); if(mine){ S.me={...mine,mine:true}; } }
+    if(S.view!=='register') render();
+  }, err=>{ clearTimeout(timer); S.sharedState='off'; loadLocalMe(); if(S.view!=='register') render(); });
+}
+function loadLocalMe(){ if(S.me) return; try{ const m=JSON.parse(localStorage.getItem('mn_me')||'null'); if(m && m.cats) S.me=m; }catch(e){} }
+
+// ---------- Boot ----------
+const h=(location.hash||'').replace('#','');
+if(h==='find'||h==='register') { S.view = h==='register'?'home':'find'; }
+render();
+initPlatform();
+</script>
+</body>
+</html>
