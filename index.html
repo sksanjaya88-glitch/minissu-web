@@ -111,6 +111,48 @@ textarea.inp{min-height:120px;resize:vertical}
 footer{font-size:13px;color:var(--mut);text-align:center;margin-top:28px;line-height:1.5}
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
 :focus-visible{outline:3px solid var(--acc);outline-offset:2px}
+.bigs{display:block}
+.rgrid{display:block}
+/* ---- Desktop / web layout (phones keep the single-column layout above) ---- */
+@media(min-width:768px){
+  .app{max-width:820px;padding:24px 32px 120px}
+  h1{font-size:40px}
+  h2{font-size:28px}
+  h3{font-size:22px}
+  .logo-mark{width:46px;height:46px}
+  .logo-txt{font-size:24px}
+  .cats{grid-template-columns:repeat(6,1fr)}
+  .cat{transition:border-color .15s,box-shadow .15s}
+  .cat:hover{border-color:var(--g);box-shadow:0 4px 14px rgba(11,93,75,.12)}
+  .bigs{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:16px 0}
+  .bigs .big{flex-direction:column;align-items:flex-start;margin:0;min-height:220px;gap:16px;transition:transform .15s,box-shadow .15s}
+  .bigs .big .ic{width:64px;height:64px}
+  .bigs .big b{font-size:24px}
+  .bigs .big:hover{transform:translateY(-2px);box-shadow:0 10px 24px rgba(11,93,75,.16)}
+  .big{cursor:pointer}
+  .big.find:hover,.big.speak:hover{box-shadow:0 10px 24px rgba(0,0,0,.08)}
+  .search{max-width:640px}
+  .sheet{max-width:640px;padding:24px 26px 30px}
+  .card{padding:20px 22px}
+  .wcard{cursor:pointer;transition:border-color .15s,box-shadow .15s}
+  .wcard:hover{border-color:var(--g2);box-shadow:0 6px 18px rgba(11,93,75,.10)}
+  .btn:hover:not(:disabled){filter:brightness(.96)}
+  .chip:hover{border-color:var(--g)}
+  .inp{max-width:640px}
+  textarea.inp{max-width:none}
+  footer{margin-top:40px}
+}
+@media(min-width:1024px){
+  .app{max-width:1120px;padding:28px 40px 120px}
+  .rgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;align-items:start}
+  .rgrid>*:not(.wcard){grid-column:1/-1}
+  .rgrid>.wcard{margin:0}
+  .rgrid .wcard{height:100%}
+  .cats{grid-template-columns:repeat(9,1fr)}
+  .bigs .big{min-height:240px}
+  .search{max-width:720px}
+  .inp{max-width:720px}
+}
 </style>
 </head>
 <body>
@@ -583,9 +625,11 @@ function vHome(){
     <button type="submit" class="iconbtn g" aria-label="search">${searchSvg}</button>
   </form>
   ${meCard}
+  <div class="bigs">
   <button class="big work" data-act="startReg"><span class="ic">🛠️</span><span><b>${esc(t('findWork'))}</b><small>${esc(t('findWorkSub'))}</small></span></button>
   <button class="big find" data-act="go" data-v="find"><span class="ic">🔍</span><span><b>${esc(t('findWorker'))}</b><small>${esc(t('findWorkerSub'))}</small></span></button>
   <button class="big speak" data-act="micHome"><span class="ic">${micSvg('#fff')}</span><span><b>${esc(t('speak'))}</b><small>${esc(t('speakSub'))}</small></span></button>
+  </div>
   <h3>${esc(t('popular'))}</h3>
   <div class="cats">${['painter','mason','electrician','plumber','ac','carpenter','welder','mechanic','cleaner'].map(id=>`<button class="cat" data-act="catSearch" data-c="${id}"><span class="e">${CAT[id].e}</span>${esc(cn(id))}</button>`).join('')}</div>
   <p class="tag">${esc(t('tagline'))}</p>`;
@@ -780,7 +824,7 @@ function vFind(){
     <button class="chip ${q.onlyPhoto?'on':''}" data-act="fPhoto">📷 ${esc(t('onlyPhoto'))}</button>
   </div>
   ${S.sharedState==='slow'?`<div class="note small">⏳ ${esc(S.lang==='en'?'Registered profiles are still loading — results may be incomplete.':S.lang==='ta'?'பதிவுசெய்யப்பட்ட சுயவிவரங்கள் இன்னும் ஏற்றப்படுகின்றன.':'ලියාපදිංචි පැතිකඩ තවම පූරණය වෙමින් පවතී — ප්‍රතිඵල අසම්පූර්ණ විය හැක.')}</div>`:''}
-  ${resHtml}`;
+  <div class="rgrid">${resHtml}</div>`;
 }
 function resultCard(r){
   const w=r.w;
