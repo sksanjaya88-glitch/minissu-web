@@ -53,7 +53,11 @@ p{margin:6px 0}
 /* ---------- Surfaces ---------- */
 .card{background:var(--card);border:1px solid var(--line);border-radius:var(--rad);padding:18px;margin:12px 0;box-shadow:var(--sh)}
 .hero{background:linear-gradient(135deg,#ffffff 0%,var(--gl) 100%);border:1px solid var(--line);border-radius:24px;padding:24px 20px;box-shadow:var(--sh)}
-.hero p{font-size:19px;color:var(--mut);margin:0}
+.eyebrow{font-weight:600;color:var(--g);font-size:17px;margin-bottom:6px}
+.hl{font-size:30px;line-height:1.25;margin:0 0 10px;letter-spacing:-.3px}
+.ln{display:block}
+.hl-mark{display:inline-block;background:var(--ink);color:#fff;border-radius:12px;padding:0 12px;margin:4px 0;line-height:1.4}
+.hero .hl-sub{font-size:18px;color:var(--mut);margin:4px 0 0;max-width:640px}
 
 /* ---------- Search ---------- */
 .search{display:flex;align-items:center;gap:8px;background:#fff;border:2px solid var(--line);border-radius:999px;padding:6px 6px 6px 20px;margin:18px 0;box-shadow:var(--sh)}
@@ -181,6 +185,8 @@ footer{font-size:13px;color:var(--mut);text-align:center;margin-top:28px;line-he
   h1{font-size:40px}
   h2{font-size:30px}
   h3{font-size:22px}
+  .hl{font-size:48px}
+  .hero .hl-sub{font-size:21px}
   .hero{padding:40px 44px}
   .hero .search{max-width:680px}
   .bigs{grid-template-columns:repeat(3,1fr);gap:16px}
@@ -251,6 +257,8 @@ footer{font-size:13px;color:var(--mut);text-align:center;margin-top:28px;line-he
 const T = {
  si:{
   navHome:'මුල් පිටුව', navFind:'සොයන්න', navMe:'මගේ පැතිකඩ',
+  hl1:'වැඩක් කරගන්න', hl2:'මනුස්සයෙක්', hl3:'හොයාගන්න අමාරුද?',
+  hlSub:'පොල් ටික කඩාගන්න එකේ ඉඳන් ඉංජිනේරු සේවාව දක්වා, සියලුම සේවාවන් සපයන වෘත්තිකයන් සහ නිපුණ ශ්‍රමිකයන් — එකම තැනකින්.',
   hello:'ආයුබෝවන්!', ask:'ඔබට අවශ්‍ය සේවාව කුමක්ද?', searchPh:'ඔබට අවශ්‍ය දේ සොයන්න...',
   findWork:'වැඩ සොයන්න', findWorkSub:'මගේ රැකියාව ප්‍රචාරය කරන්න', findWorker:'කෙනෙක් සොයන්න', findWorkerSub:'දක්ෂ කෙනෙක් ඉක්මනින් සොයාගන්න',
   speak:'කතා කර සොයන්න', speakSub:'සිංහල, දෙමළ හෝ ඉංග්‍රීසියෙන් කතා කරන්න', tagline:'ඕනෑ වැඩකට මනුස්සයෙක්, දැන් ෆෝන් එකෙන්',
@@ -291,6 +299,8 @@ const T = {
  },
  ta:{
   navHome:'முகப்பு', navFind:'தேடு', navMe:'என் சுயவிவரம்',
+  hl1:'வேலை செய்ய', hl2:'ஒருவரை', hl3:'கண்டுபிடிப்பது கடினமா?',
+  hlSub:'தென்னை மரம் ஏறுபவர் முதல் பொறியாளர் வரை — எல்லா சேவைகளையும் வழங்கும் திறமையான தொழிலாளர்கள், ஒரே இடத்தில்.',
   hello:'வணக்கம்!', ask:'உங்களுக்கு என்ன சேவை தேவை?', searchPh:'உங்களுக்கு தேவையானதைத் தேடுங்கள்...',
   findWork:'வேலை தேடுங்கள்', findWorkSub:'என் வேலையை விளம்பரப்படுத்து', findWorker:'ஒருவரைத் தேடுங்கள்', findWorkerSub:'திறமையானவரை விரைவாகக் கண்டுபிடிக்கவும்',
   speak:'பேசித் தேடுங்கள்', speakSub:'சிங்களம், தமிழ் அல்லது ஆங்கிலத்தில் பேசுங்கள்', tagline:'எந்த வேலைக்கும் ஒருவர், இப்போது உங்கள் போனில்',
@@ -326,6 +336,8 @@ const T = {
  },
  en:{
   navHome:'Home', navFind:'Find', navMe:'My profile',
+  hl1:'Getting work done', hl2:'someone', hl3:'hard to find?',
+  hlSub:'From coconut-tree climbers to engineers — skilled workers and professionals for every service, all in one place.',
   hello:'Ayubowan!', ask:'What service do you need?', searchPh:'Search for what you need...',
   findWork:'Find work', findWorkSub:'Advertise my work', findWorker:'Find a worker', findWorkerSub:'Find a skilled person quickly',
   speak:'Tap to speak', speakSub:'Speak in Sinhala, Tamil or English', tagline:'A person for any job, now on your phone',
@@ -694,8 +706,9 @@ function vHome(){
   const meCard = S.me ? `<div class="card"><div class="toggle"><div><div class="mut small">${esc(t('myProfile'))}</div><b>${esc(S.me.name)}</b> · <span class="occ">${esc(cn(S.me.cats[0]))}</span><div class="small">${S.me.avail==='now'?esc(t('availSwitchOn')):esc(t('availSwitchOff'))}</div></div><button class="sw ${S.me.avail==='now'?'on':''}" data-act="toggleAvail" aria-label="availability"></button></div><button class="btn t" data-act="go" data-v="me">${esc(t('myProfile'))} →</button></div>` : '';
   return `
   <section class="hero">
-  <h1>${esc(t('hello'))}</h1>
-  <p>${esc(t('ask'))}</p>
+  <div class="eyebrow">${esc(t('hello'))}</div>
+  <h1 class="hl"><span class="ln">${esc(t('hl1'))}</span><span class="ln"><mark class="hl-mark">${esc(t('hl2'))}</mark></span><span class="ln">${esc(t('hl3'))}</span></h1>
+  <p class="hl-sub">${esc(t('hlSub'))}</p>
   <form class="search" data-form="homeSearch">
     <input id="homeQ" placeholder="${esc(t('searchPh'))}" autocomplete="off" aria-label="${esc(t('searchPh'))}">
     <button type="button" class="iconbtn l" data-act="micHome" aria-label="${esc(t('speak'))}">${micSvg()}</button>
