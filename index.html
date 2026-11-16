@@ -9,11 +9,11 @@
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Sinhala:wght@400;600;700&family=Noto+Sans+Tamil:wght@400;600;700&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
 :root{
-  --g:#0b5d4b;--g2:#0f7a61;--gl:#e6f2ee;--acc:#e89a00;--accl:#fff4dc;
+  --g:#13315c;--g2:#1f4f8a;--gl:#e6edf7;--acc:#b98200;--accl:#fbf1d6;
   --ink:#17201d;--mut:#5b6863;--bg:#f5f4f0;--card:#fff;--line:#e4e0d6;
   --red:#b8382a;--redl:#fbe9e6;--ok:#1f8a4c;--rad:18px;--side:250px;
   --sh:0 1px 2px rgba(23,32,29,.05),0 4px 14px rgba(23,32,29,.06);
-  --sh-hover:0 2px 4px rgba(23,32,29,.06),0 12px 28px rgba(11,93,75,.14);
+  --sh-hover:0 2px 4px rgba(23,32,29,.06),0 12px 28px rgba(19,49,92,.14);
 }
 *{box-sizing:border-box}
 html,body{margin:0;background:var(--bg);color:var(--ink)}
@@ -62,7 +62,7 @@ p{margin:6px 0}
 /* ---------- Search ---------- */
 .search{display:flex;align-items:center;gap:8px;background:#fff;border:2px solid var(--line);border-radius:999px;padding:6px 6px 6px 20px;margin:18px 0;box-shadow:var(--sh)}
 .hero .search{margin:16px 0 0}
-.search:focus-within{border-color:var(--g2);box-shadow:0 0 0 4px rgba(15,122,97,.12)}
+.search:focus-within{border-color:var(--g2);box-shadow:0 0 0 4px rgba(31,79,138,.12)}
 .search input{flex:1;border:0;outline:0;background:none;min-width:0;padding:8px 0;font-size:18px}
 .iconbtn{width:50px;height:50px;border-radius:50%;border:0;display:grid;place-items:center;cursor:pointer;flex:none}
 .iconbtn.g{background:var(--g);color:#fff}
@@ -87,7 +87,7 @@ p{margin:6px 0}
 
 /* ---------- Buttons ---------- */
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border-radius:14px;border:0;padding:14px 20px;font-weight:600;cursor:pointer;min-height:54px;transition:filter .15s,box-shadow .15s}
-.btn.p{background:var(--g);color:#fff;box-shadow:0 4px 12px rgba(11,93,75,.22)}
+.btn.p{background:var(--g);color:#fff;box-shadow:0 4px 12px rgba(19,49,92,.22)}
 .btn.p:disabled{opacity:.5;cursor:not-allowed;box-shadow:none}
 .btn.s{background:#fff;color:var(--g);border:2px solid var(--g)}
 .btn.t{background:none;color:var(--g);padding:10px 8px;min-height:auto}
@@ -102,7 +102,7 @@ p{margin:6px 0}
 /* ---------- Forms ---------- */
 label.f{display:block;font-weight:600;margin:16px 0 6px}
 .inp{width:100%;border:2px solid var(--line);border-radius:14px;padding:13px 14px;background:#fff;outline:0;font-size:18px}
-.inp:focus{border-color:var(--g2);box-shadow:0 0 0 4px rgba(15,122,97,.1)}
+.inp:focus{border-color:var(--g2);box-shadow:0 0 0 4px rgba(31,79,138,.1)}
 textarea.inp{min-height:120px;resize:vertical}
 .hint{font-size:15px;color:var(--mut);margin-top:4px}
 
@@ -161,7 +161,7 @@ textarea.inp{min-height:120px;resize:vertical}
 .sheet{background:var(--bg);width:100%;max-height:92vh;overflow:auto;border-radius:24px 24px 0 0;padding:18px 18px 28px}
 .toast{position:fixed;left:50%;bottom:90px;transform:translateX(-50%);background:var(--ink);color:#fff;border-radius:14px;padding:12px 18px;font-size:16px;z-index:80;max-width:92vw;box-shadow:0 6px 20px rgba(0,0,0,.2)}
 .spin{display:inline-block;width:18px;height:18px;border:3px solid rgba(255,255,255,.4);border-top-color:#fff;border-radius:50%;animation:sp 1s linear infinite}
-.spin.d{border-color:rgba(11,93,75,.25);border-top-color:var(--g)}
+.spin.d{border-color:rgba(19,49,92,.25);border-top-color:var(--g)}
 @keyframes sp{to{transform:rotate(360deg)}}
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
 footer{font-size:13px;color:var(--mut);text-align:center;margin-top:28px;line-height:1.5}
@@ -223,7 +223,7 @@ footer{font-size:13px;color:var(--mut);text-align:center;margin-top:28px;line-he
   <aside class="side">
     <div class="logo-row">
       <button class="logo" data-act="home" aria-label="Minissu.lk home">
-        <span class="logo-mark"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><circle cx="8" cy="8" r="3.2" fill="#fff"/><circle cx="16" cy="8" r="3.2" fill="#e89a00"/><path d="M2.5 19c.6-3.4 2.8-5.4 5.5-5.4s4.9 2 5.5 5.4M10.5 19c.6-3.4 2.8-5.4 5.5-5.4s4.9 2 5.5 5.4" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg></span>
+        <span class="logo-mark"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><circle cx="8" cy="8" r="3.2" fill="#fff"/><circle cx="16" cy="8" r="3.2" fill="#b98200"/><path d="M2.5 19c.6-3.4 2.8-5.4 5.5-5.4s4.9 2 5.5 5.4M10.5 19c.6-3.4 2.8-5.4 5.5-5.4s4.9 2 5.5 5.4" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg></span>
         <span class="logo-txt">minissu<span>.lk</span></span>
       </button>
       <div class="langs" role="group" aria-label="Language">
